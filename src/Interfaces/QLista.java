@@ -1,5 +1,5 @@
 package Interfaces;
-
+//Lista
 public interface QLista<T> extends Iterable<T>{
     void agregar(T nodo);
     void eliminar(T nodo);

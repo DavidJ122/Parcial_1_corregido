@@ -3,7 +3,7 @@ package Concretos;
 import java.util.HashMap;
 import java.util.Random;
 import Enum.Destino;
-
+//Clase Paquete
 public class Paquete{
     private String Codigo;
     private Destino destino;

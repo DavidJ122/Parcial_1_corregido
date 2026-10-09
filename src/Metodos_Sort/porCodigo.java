@@ -1,7 +1,7 @@
 package Metodos_Sort;
 import java.util.Comparator;
 import Concretos.Paquete;
-
+//Ordena por codigo
 public class porCodigo implements Sort<Paquete> {
 
 

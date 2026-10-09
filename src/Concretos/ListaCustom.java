@@ -5,7 +5,7 @@ import Interfaces.QLista;
 import java.util.Iterator;
 import Enum.Shuffle;
 import Metodos_Sort.*;
-
+//Lista
 public class ListaCustom implements QLista<Paquete> {
     Paquete header = null;
 

@@ -1,5 +1,5 @@
 package Interfaces;
-
+//
 public interface Nodo {
     public String getCodigo();
     public boolean existe(Object t);

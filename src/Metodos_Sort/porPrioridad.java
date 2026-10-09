@@ -1,5 +1,5 @@
 package Metodos_Sort;
-
+//Ordena por prioridad
 import Concretos.Paquete;
 
 public class porPrioridad implements Sort<Paquete>{

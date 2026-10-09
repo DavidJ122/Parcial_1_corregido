@@ -1,5 +1,5 @@
 package Metodos_Sort;
-
+//Ordena por tiempo
 import Concretos.Paquete;
 
 import java.util.Comparator;

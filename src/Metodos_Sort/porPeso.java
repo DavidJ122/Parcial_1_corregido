@@ -1,5 +1,5 @@
 package Metodos_Sort;
-
+//Ordena por peso
 import Concretos.Paquete;
 
 import java.util.Comparator;

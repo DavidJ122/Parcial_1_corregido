@@ -1,7 +1,7 @@
 package Concretos;
 
 import java.util.Iterator;
-
+//Iterator
 public class PaqueteIterator implements Iterator<Paquete> {
     Paquete here;
     PaqueteIterator(Paquete here){
