@@ -1,6 +1,5 @@
-package Metodos_Sort;
-import java.util.Comparator;
-import Concretos.Paquete;
+package Legacy.Metodos_Sort;
+import Legacy.Concretos.Paquete;
 //Ordena por codigo
 public class porCodigo implements Sort<Paquete> {
 

@@ -1,10 +1,10 @@
-package Concretos;
+package Legacy.Concretos;
 
-import Interfaces.QLista;
+import Legacy.Interfaces.QLista;
 
 import java.util.Iterator;
-import Enum.Shuffle;
-import Metodos_Sort.*;
+import Legacy.Enum.Shuffle;
+import Legacy.Metodos_Sort.*;
 //Lista
 public class ListaCustom implements QLista<Paquete> {
     Paquete header = null;

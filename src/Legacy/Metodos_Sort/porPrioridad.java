@@ -1,6 +1,6 @@
-package Metodos_Sort;
+package Legacy.Metodos_Sort;
 //Ordena por prioridad
-import Concretos.Paquete;
+import Legacy.Concretos.Paquete;
 
 public class porPrioridad implements Sort<Paquete>{
     @Override

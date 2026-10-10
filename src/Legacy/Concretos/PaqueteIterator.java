@@ -1,4 +1,4 @@
-package Concretos;
+package Legacy.Concretos;
 
 import java.util.Iterator;
 //Iterator

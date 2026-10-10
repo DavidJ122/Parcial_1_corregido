@@ -1,8 +1,6 @@
-package Metodos_Sort;
+package Legacy.Metodos_Sort;
 //Ordena por peso
-import Concretos.Paquete;
-
-import java.util.Comparator;
+import Legacy.Concretos.Paquete;
 
 public class porPeso implements Sort<Paquete>{
     @Override
