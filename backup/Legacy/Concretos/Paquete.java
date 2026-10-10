@@ -1,8 +1,9 @@
+
 package Legacy.Concretos;
 
 import java.util.HashMap;
 import java.util.Random;
-import Legacy.Enum.Destino;
+import Remodelado.Enum.Destino;
 //Clase Paquete
 public class Paquete{
     private String Codigo;
