@@ -96,7 +96,7 @@ public Paquete next() {
 
 private void setCodigo(String Codigo){
     String Codigo_aux=Codigo;
-    if (Codigo.isEmpty()) {
+    if (Codigo == null || Codigo.isBlank()) {
         Codigo_aux = generateCodigo();
     }
     else{Codigo_aux=Codigo;};
@@ -105,7 +105,7 @@ private void setCodigo(String Codigo){
 
 private String generateCodigo(){
     Random entero=new Random();
-    return "PQ" + entero.nextInt(999);
+    return "PQ" + (entero.nextInt(900)+100);
 }
 
 private void setDestino(Destino destino){
