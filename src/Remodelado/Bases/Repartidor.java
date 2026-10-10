@@ -1,5 +1,6 @@
-package Concretos;
-import Enum.Destino;
+package Remodelado.Bases;
+
+import Remodelado.Enum.Destino;
 
 import java.util.Objects;
 
