@@ -1,7 +1,5 @@
 package Remodelado.Bases;
 
-import java.util.HashMap;
-import java.util.Random;
 import Remodelado.Enum.Destino;
 
 public class Paquete implements Comparable<Paquete>{
