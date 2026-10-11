@@ -1,4 +1,4 @@
-package Remodelado.Bases;
+package Remodelado.Modelo;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package Remodelado.Bases;
+package Remodelado.Modelo;
 
 import Remodelado.Enum.Destino;
 
@@ -69,4 +69,23 @@ public class Paquete implements Comparable<Paquete>{
                 codigo, destino.getNombre(), peso, prioridad, tiempoEstimado);
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public Destino getDestino() {
+        return destino;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public int getTiempoEstimado() {
+        return tiempoEstimado;
+    }
 }

@@ -1,8 +1,6 @@
-package Remodelado.Bases;
+package Remodelado.Modelo;
 
 import Remodelado.Enum.Destino;
-
-import java.util.Objects;
 
 public class Repartidor {
     private final String id;
