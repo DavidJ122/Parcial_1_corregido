@@ -3,97 +3,72 @@ package Remodelado.Bases;
 import java.util.HashMap;
 import java.util.Random;
 import Remodelado.Enum.Destino;
-//Clase Paquete
+
 public class Paquete implements Comparable<Paquete>{
-    private String Codigo;
-    private Destino destino;
-    private float peso;
-    private int Prioridad;
-    private int Tiempo_estimado;
 
+    // Constantes de prioridad
+    public static final int PRIORIDAD_MINIMA=0;
+    public static final int PRIORIDAD_MAX=5;
+    public static final int PRIORIDAD_PORDEFECTO=3;
 
-    Paquete(HashMap<String,Object> datos){
-        if (datos.isEmpty()  || !datos.containsKey("Destino") || !datos.containsKey("Peso")  || !datos.containsKey("Tiempo_estimado") )
-        { throw new IllegalArgumentException("Faltaron uno o mas datos");}
+    //ATRIBUTOS DE CLASE
 
-        if (datos.containsKey("Codigo")) {
-            setCodigo((String) datos.get("Codigo"));
-        }else{
-            setCodigo("");
+    private final String codigo;
+    private final Destino destino;
+    private final double peso;
+    private final int prioridad ;
+    private final int tiempoEstimado;
+
+    public Paquete(String codigo, Destino destino, double peso, int prioridad, int tiempoEstimado) {
+        if (codigo == null || codigo.isBlank()){
+            throw new IllegalArgumentException("el codigo del paquete debe ser asignado ahora mismo");
         }
-
-        setDestino((Destino) datos.get("Destino"));
-
-        setPeso((float) datos.get("Peso"));
-
-        if (datos.containsKey("Prioridad")) {
-            setPrioridad((int) datos.get("Prioridad"));
+        if (destino==null) {
+            throw new IllegalArgumentException("el destino del paquete debe decidirse ahora mismo");
         }
-        else{ this.Prioridad=5;}
-
-        setTiempo_estimado((int) datos.get("Tiempo_estimado"));
-    }
-
-    public String getCodigo(){
-        return this.Codigo;
-    }
-
-    private void setCodigo(String Codigo){
-        String Codigo_aux=Codigo;
-        if (Codigo.isEmpty()) {
-            Codigo_aux = generateCodigo();
+        if (peso<0){
+            throw new IllegalArgumentException("el peso del paquete no debe ser menor a 0");
         }
-        else{Codigo_aux=Codigo;};
-        this.Codigo=Codigo_aux;
+        if (prioridad < PRIORIDAD_MINIMA||prioridad > PRIORIDAD_MAX){
+            throw new IllegalArgumentException("la prioridad debe estar entre" + PRIORIDAD_MINIMA + "Y" +PRIORIDAD_MAX);
+        }
+        if(tiempoEstimado<=0){
+            throw new IllegalArgumentException("el tiempo estimado debe ser mayor a 0");
+        }
+        this.codigo = codigo.trim();
+        this.destino = destino;
+        this.peso = peso;
+        this.prioridad = prioridad;
+        this.tiempoEstimado = tiempoEstimado;
     }
-
-    private String generateCodigo(){
-        Random entero=new Random();
-        return "PQ" + entero.nextInt(999);
-    }
-
-    public void setDestino(Destino destino){
-        if (destino==null) { throw new IllegalArgumentException("El destino no puede ser nulo");}
-        this.destino=destino;
-    }
-
-    public Destino getDestino(){
-        return this.destino;
-    }
-
-    private void setPeso(float peso){
-        if (peso<=0) { throw new IllegalArgumentException("El peso debe ser mayor a 0");}
-        this.peso=peso;
-    }
-
-    public float getPeso(){
-        return this.peso;
-    }
-
-    private void setPrioridad(int Prioridad){
-        if (Prioridad < 1 || Prioridad > 5) { throw new IllegalArgumentException("La prioridad debe estar entre 1 y 5");}
-        this.Prioridad=Prioridad;
-
-    }
-
-    public int getPrioridad(){
-        return this.Prioridad;
-    }
-
-    private void setTiempo_estimado(int Tiempo_estimado){
-        if (Tiempo_estimado < 0) { throw new IllegalArgumentException("El tiempo estimado debe ser mayor a 0");}
-        this.Tiempo_estimado=Tiempo_estimado;
-    }
-
-    public int getTiempo_estimado(){
-        return this.Tiempo_estimado;
-    }
-
-    public int getPID_Raw(){
-        return Integer.parseInt(this.Codigo.substring(2));
+    public Paquete(String codigo, Destino destino, double peso, int tiempoEstimado){
+        this(codigo, destino, peso, PRIORIDAD_PORDEFECTO, tiempoEstimado);
     }
     @Override
-    public int compareTo(Paquete o) {
-        return Integer.compare(this.Prioridad, o.getPrioridad());
+    public int compareTo(Paquete otro){
+        return this.codigo.compareTo(otro.codigo);
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Paquete otro = (Paquete) o;
+        return codigo.equals(otro.codigo);
+    }
+
+    @Override
+    public int hashCode(){
+        return codigo.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s [%s, %.1f kg, prioridad %d, %d min]",
+                codigo, destino.getNombre(), peso, prioridad, tiempoEstimado);
+    }
+
 }
