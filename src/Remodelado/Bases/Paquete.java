@@ -93,7 +93,11 @@ public class Paquete implements Comparable<Paquete>{
         return Integer.parseInt(this.Codigo.substring(2));
     }
     @Override
+    public String toString(){
+        return this.getCodigo();
+    }
+    @Override
     public int compareTo(Paquete o) {
-        return Integer.compare(this.Prioridad, o.getPrioridad());
+        return Integer.compare(this.getPrioridad(), o.getPrioridad());
     }
 }
