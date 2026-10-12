@@ -20,14 +20,14 @@ public class CentroDistribucion {
     // (Opcional) Si manejan repartidores en una estructura propia o estándar
     private final EstructuraFIFO colaEntregasNormales;
 
-    public CentroDistribucion(List<Paquete> historialPaquetes) {
+    public CentroDistribucion() {
 
         // Inicializamos las estructuras
         this.historialLlegada = new EstructuraAuditoria();
         this.paquetesPorDestino = new EstructuraDestino();
         this.registroPorId = new EstructuraOrdenID();
         this.colaEntregasNormales = new EstructuraFIFO();
-        this.historialPaquetes = historialPaquetes; // Lista simplemente enlazada
+        this.historialPaquetes = new List<>();
         // La estructura prioritaria recibe el comparador compuesto complejo
         this.colaDespacho = new EstructuraPrioritaria(new ComparadorDespacho());
     }

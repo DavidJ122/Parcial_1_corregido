@@ -112,7 +112,7 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
         return sb.toString();
     }
     //Retorna un conjunto de strings con todos los municipios del hashmap.
-    public TreeSet<String> getPaquetesOrdenID(){
+    public TreeSet<String> getMunicipios(){
         TreeSet<String> paquetesOrdenID = new TreeSet<>();
         for (Destino d : this.paquetes.keySet()) {
             paquetesOrdenID.add(d.toString());

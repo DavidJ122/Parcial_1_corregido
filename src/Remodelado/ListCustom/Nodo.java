@@ -1,5 +1,7 @@
 package Remodelado.ListCustom;
 
+import java.util.NoSuchElementException;
+
 //Nodo de la lista
 /*
 Almacena un dato de tipo T y un puntero al siguiente nodo.
@@ -43,7 +45,7 @@ public class Nodo<T>{
             return dato;
         }
         if (this.hasNext()) {return next.get(position,current+1);}
-        throw new IllegalArgumentException("No element found");
+        throw new NoSuchElementException("No element found");
     }
     //Elimina el nodo con el dato dado mediante recursividad.
     //Si no se encuentra el dato, lanza una excepcion.
@@ -68,7 +70,7 @@ public class Nodo<T>{
             this.setNext(next.del(dato_nuevo));
             return this;
         }
-        throw new IllegalArgumentException("No element found");
+        throw new NoSuchElementException("No element found");
 
     }
     //Compara el dato del nodo con el dato dado.

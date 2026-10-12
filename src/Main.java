@@ -7,7 +7,7 @@ import java.util.HashMap;
 //Main
 public class Main {
     public static void main(String[] args) {
-
+        CentroDistribucion quindioExpress = new CentroDistribucion();
 
 
 
@@ -15,6 +15,8 @@ public class Main {
     public static void generarPaquetes(EstructuraOrdenID estructuraPrincipal, EstructuraAuditoria estructuraAuditoria){
 
         //Declaracion de variables
+
+        //Datos de los paquetes
         HashMap<String, Object> datos1 = new HashMap<>();
         datos1.put("Codigo", "PD000");
         datos1.put("Destino", Destino.Armenia);

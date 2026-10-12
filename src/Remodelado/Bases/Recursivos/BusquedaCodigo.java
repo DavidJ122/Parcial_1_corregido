@@ -1,52 +1,59 @@
-package Remodelado.Bases.Recursivos;
-
-
+ package Remodelado.Bases.Recursivos;
 
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.ArrayList;
 import java.util.Collection;
-//Busca un paquete por su codigo de forma "eficiente" y por divide y venceras.
-/*
-Se utiliza para la busqueda de un paquete por su codigo.
-Funciona dividiendo la lista en dos partes y buscando en cada una de ellas.
-Se itera sobre las dos mitades.
-Se evalua recursivamente.
-En caso de que:
-- El codigo no se encuentra en el nodo del indice:
-    - Si es final: Devuelve -1
-    - Si no es final: Se evalua recursivamente.
--  El codigo se encuentra en el nodo del indice:
-    - Devuelve el indice del nodo.
-    - En caso de que sea la segunda mitad: Devuelve el indice del nodo + la mitad de la lista.
-Indice1: Indica el indice del nodo del codigo en la primera mitad, sumado con 1 para que de si no se encuentra.
-Indice2: Indica el indice del nodo del codigo en la segunda mitad, sumado con 1 para que de si no se encuentra.
-Si ambos indice son 0, devuelve null.
- */
+import java.util.Collections;
+
+// Busca un paquete por su código mediante el algoritmo de divide y vencerás.
 public class BusquedaCodigo {
 
+    // Lista de paquetes ordenada que se utilizará para realizar las búsquedas.
+    ArrayList<Paquete> lista;
 
-    public Paquete Buscar(Collection<Paquete> lista_paquete, String dato){
-        ArrayList<Paquete> lista = new ArrayList<>(lista_paquete);
-        int medio = lista.size()/2;
-        ArrayList<Paquete> sublista = new ArrayList<>(lista.subList(0,medio));
-        ArrayList<Paquete> sublista2 = new ArrayList<>(lista.subList(medio+1,lista_paquete.size()));
-        int indice1 = Buscar_recursivo(sublista,dato,0) + 1;
-        int indice2 = Buscar_recursivo(sublista2,dato,0) +1;
-        if (indice1 == 0 && indice2 == 0){ return null;}
-        if (indice1 == 0){ return lista.get(indice2+medio-1);}
-        if (indice2 == 0){ return lista.get(indice1-1);}
-        return null;
+    // Inicializa la lista a partir de una colección y ordena sus elementos.
+    public BusquedaCodigo(Collection<Paquete> lista_paquete) {
+        this.lista = new ArrayList<>(lista_paquete);
+
+        // Ordena los paquetes para permitir la búsqueda binaria.
+        Collections.sort(lista);
     }
 
-    private int Buscar_recursivo(ArrayList<Paquete> lista, String dato,int i){
-        if (i == lista.size()){ return -1;}
-        Paquete p = lista.get(i);
-        if (p.getCodigo().equals(dato)){ return lista.indexOf(p);}
-        return this.Buscar_recursivo(lista,dato,i+1);
+    // Inicia la búsqueda recursiva utilizando la lista previamente ordenada.
+    public Paquete Buscar(String dato) {
+        return buscarRecursivo(lista, dato);
     }
 
+    // Busca un paquete dividiendo repetidamente la lista en dos mitades.
+    private Paquete buscarRecursivo(ArrayList<Paquete> lista, String dato) {
 
+        // Si la lista está vacía, significa que el código no se encontró.
+        if (lista.isEmpty()) {
+            return null;
+        }
 
+        // Calcula el índice del elemento central de la lista.
+        int medio = lista.size() / 2;
 
+        // Compara el código del paquete central con el código buscado.
+        int comparativa = lista.get(medio).getCodigo().compareTo(dato);
+
+        if (comparativa == 0) {
+            // Si los códigos coinciden, devuelve el paquete encontrado.
+            return lista.get(medio);
+
+        } else if (comparativa > 0) {
+            // Si el código central es mayor, busca en la mitad izquierda.
+            return buscarRecursivo(
+                    new ArrayList<>(lista.subList(0, medio)), dato
+            );
+
+        } else {
+            // Si el código central es menor, busca en la mitad derecha.
+            return buscarRecursivo(
+                    new ArrayList<>(lista.subList(medio + 1, lista.size())), dato
+            );
+        }
+    }
 }

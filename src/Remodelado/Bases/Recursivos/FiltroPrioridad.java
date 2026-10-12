@@ -7,12 +7,14 @@ import java.util.ArrayList;
 public class FiltroPrioridad{
 
     public Integer filtrar(ArrayList<Paquete> dato, int priminima,int i) {
+        //Caso Base
         if (i == dato.size() - 1) {
             if (this.filtro(dato.get(i),priminima)){
                 return 1 + this.filtrar(dato,priminima,i+1);
             }
             return 0;
         }
+        //Caso Recursivo
         if (this.filtro(dato.get(i),priminima)){
             return 1 + this.filtrar(dato,priminima,i+1);
         }

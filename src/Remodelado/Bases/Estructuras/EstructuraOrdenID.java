@@ -3,6 +3,7 @@ package Remodelado.Bases.Estructuras;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.Collection;
+import java.util.DuplicateFormatFlagsException;
 import java.util.TreeSet;
 //Estructura especializada para organizar los paquetes por su ID.
 /* En esta estructura, los paquetes son ordenados por su ID y con un orden natural.
@@ -26,7 +27,7 @@ public class EstructuraOrdenID implements IEstructura<TreeSet<Paquete>,String> {
     public void addPaquete(Paquete paquete) {
         boolean exito = paquetes.add(paquete);
         if (!exito){
-            throw new RuntimeException("El ID paquete ya existe con ID: " + paquete.getCodigo());
+            throw new IllegalArgumentException("El ID paquete ya existe con ID: " + paquete.getCodigo());
         }
     }
     //Elimina un paquete del TreeSet.
