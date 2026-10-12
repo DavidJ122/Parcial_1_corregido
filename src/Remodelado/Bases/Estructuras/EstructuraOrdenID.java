@@ -1,7 +1,8 @@
 package Remodelado.Bases.Estructuras;
 
-import Remodelado.Bases.modelo.Paquete;
+import Remodelado.Bases.Paquete;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
 
@@ -61,14 +62,5 @@ public class EstructuraOrdenID implements IEstructura<TreeSet<Paquete>,String> {
             sb.append(p.toString()).append("\n");
         }
         return sb.toString();
-    }
-
-    public Paquete buscarPorId(String codigoId) {
-        for (Paquete paquete : paquetes) {
-            if (paquete.getCodigo().equals(codigoId)) {
-                return paquete;
-            }
-        }
-        return null;
     }
 }

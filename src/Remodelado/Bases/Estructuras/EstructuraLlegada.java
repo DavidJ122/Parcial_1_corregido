@@ -1,7 +1,8 @@
 package Remodelado.Bases.Estructuras;
 
-import Remodelado.Bases.modelo.Paquete;
+import Remodelado.Bases.Paquete;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 

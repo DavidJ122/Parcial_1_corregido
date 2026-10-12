@@ -1,8 +1,9 @@
 package Remodelado.Bases.Estructuras;
 
-import Remodelado.Bases.modelo.Paquete;
+import Remodelado.Bases.Paquete;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class EstructuraFIFO implements IEstructura<ArrayDeque<Paquete>,String> {
