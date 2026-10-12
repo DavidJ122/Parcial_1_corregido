@@ -45,19 +45,55 @@ public class GestorRepartidores {
         return resultado;
     }
 
-    public void asignar(Paquete paquete, Repartidor repartidor) {
-        if (!repartidor.estaDisponible()) {
-            throw new IllegalStateException("El repartidor " + repartidor.getId() + " no está disponible.");
+    public void asignar(String repartidorID,Paquete paquete) {
+        Repartidor repartidor = this.buscar(repartidorID);
+        if (repartidor == null) {
+            throw new IllegalArgumentException("El repartidor no puede ser nulo.");
         }
-        if (repartidor.getZona() != paquete.getDestino()) {
-            throw new IllegalStateException("La zona del repartidor (" + repartidor.getZona()
-                    + ") no coincide con el destino del paquete (" + paquete.getDestino() + ").");
+        if (!repartidor.estaDisponible()){
+            throw new IllegalArgumentException("El repartidor no esta disponible");
         }
         repartidor.ocupar();
+        System.out.println("Paquete "+ paquete.getCodigo()+" asignado a " + repartidor.getId());
         asignaciones.put(paquete.getCodigo(), repartidor);
     }
 
     public void liberar(String codigoPaquete) {
-        asignaciones.remove(codigoPaquete).liberar();
+        Repartidor repartidor = asignaciones.get(codigoPaquete);
+        if (repartidor == null) {
+            throw new IllegalArgumentException("No existe una asignacion para el paquete con codigo " + codigoPaquete );
+        }
+        asignaciones.remove(codigoPaquete);
+        repartidor.liberar();
+    }
+
+    public Repartidor consultarRepartidor(String codigoPaquete){
+        return asignaciones.get(codigoPaquete);
+    }
+    public String consultarPaquete(Repartidor repartidor){
+        for (Map.Entry<String, Repartidor> entry : asignaciones.entrySet()) {
+            if (entry.getValue().equals(repartidor)) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+    public Destino consultarRepartidorDestino(String repartidorID){
+        Repartidor repartidor = this.buscar(repartidorID);
+        if (repartidor == null) {
+            throw new IllegalArgumentException("El repartidor no puede ser nulo.");
+        }
+        return repartidor.getZona();
+    }
+    public void consultarRepartidores(boolean disponibles){
+        for (Repartidor repartidor : repartidores) {
+            if (repartidor.estaDisponible() == disponibles) {
+                System.out.println("Repartidor: " + repartidor);
+                System.out.println("Zona: " + repartidor.getZona());
+                if (!disponibles){
+                    System.out.println("Paquete: " + this.consultarPaquete(repartidor));
+                }
+            }
+        }
     }
 }

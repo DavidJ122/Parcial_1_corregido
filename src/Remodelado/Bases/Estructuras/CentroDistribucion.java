@@ -5,6 +5,7 @@ import Remodelado.Bases.Recursivos.FiltroPesoTotal;
 import Remodelado.Bases.Recursivos.FiltroPrioridad;
 import Remodelado.Bases.modelo.Paquete;
 import Remodelado.Bases.Comparadores.*;
+import Remodelado.Bases.modelo.Repartidor;
 import Remodelado.Enum.Destino;
 import Remodelado.ListCustom.List;
 
@@ -23,6 +24,7 @@ public class CentroDistribucion {
     private final EstructuraDestino paquetesPorDestino;
     private final EstructuraOrdenID registroPorId;
     private final List<Paquete> historialPaquetes;
+    private final GestorRepartidores gestorRepartidores;
 
     // (Opcional) Si manejan repartidores en una estructura propia o estándar
     private final EstructuraFIFO colaEntregasNormales;
@@ -37,6 +39,7 @@ public class CentroDistribucion {
         this.historialPaquetes = new List<>();
         // La estructura prioritaria recibe el comparador compuesto complejo
         this.colaDespacho = new EstructuraPrioritaria(new ComparadorDespacho());
+        this.gestorRepartidores = new GestorRepartidores();
     }
 
     /**
@@ -103,20 +106,92 @@ public class CentroDistribucion {
     /**
      * DESPACHO PRIORITARIO: Extrae el paquete más urgente según ComparadorDespacho
      */
-    public Paquete despacharSiguienteUrgente() {
-        if (colaDespacho.isEmpty()) {
+    public Paquete despacharSiguienteUrgente(EstructuraPrioritaria colaDestino) {
+        if (colaDestino.isEmpty()) {
             return null;
         }
-        this.historialPaquetes.add(colaDespacho.getPaquetes().peek());
-        this.registroPorId.removePaquete(colaDespacho.getPaquetes().peek());
-        return colaDespacho.getFirst(); // Internamente usa O(log n)
+        Paquete paquete = colaDestino.getPaquetes().peek();
+        if (paquete == null) {
+            return null;
+        }
+        this.historialPaquetes.add(paquete);
+        this.registroPorId.removePaquete(paquete);
+        this.paquetesPorDestino.removePaquete(paquete);
+        this.colaDespacho.removePaquete(paquete);
+        return colaDestino.getFirst(); // Internamente usa O(log n)
     }
 
+    /**
+     * REGISTRO: Un repartidor se registra en el sistema
+     */
+    public void registrarRepartidor(Repartidor repartidor) {
+        gestorRepartidores.registrar(repartidor);
+    }
+    /**
+     * BUSQUEDA: Un repartidor se busca por su ID
+     */
+    public Repartidor buscarRepartidor(String id){
+        Repartidor repartidor = gestorRepartidores.buscar(id);
+        if(repartidor == null){
+            System.out.println("El repartidor con el ID " + id + " no existe");
+            return null;
+        }else{
+            System.out.println("El repartidor con el ID " + id + " existe");
+            return repartidor;
+        }
+
+    }
     /**
      * BÚSQUEDA DIRECTA: Utiliza la estructura especializada de IDs
      */
     public Paquete buscarPaquete(String codigoId) {
         return registroPorId.getPaquete(codigoId);
+    }
+
+    /**
+     * Se asigna un repartidor a un paquete en caso de que exista disponibilidad
+     */
+    public void asignacionRepartidor(String repartidorID){
+        EstructuraPrioritaria colaDestino = new EstructuraPrioritaria(new ComparadorDespacho());
+        colaDestino.copyAll(this.paquetesPorDestino.getDestinoPaquete(this.gestorRepartidores.consultarRepartidorDestino(repartidorID)));
+        Paquete paquete = this.despacharSiguienteUrgente(colaDestino);
+        try {
+            gestorRepartidores.asignar(repartidorID,paquete);
+        }catch (Exception e){
+            System.out.println("No hay repartidores disponibles");
+            this.registrarPaquete(paquete);
+            this.historialPaquetes.del(paquete);
+        }
+    }
+
+    /**
+     * Libera un repartidor de un paquete
+     * @param codigoId
+     */
+    public void liberacionRepartidor(String codigoId){
+        gestorRepartidores.liberar(codigoId);
+    }
+
+    /**
+     * Consulta el paquete asignado a un repartidor
+     * @param repartidor
+     */
+    public void consultarPaquete(Repartidor repartidor){
+        System.out.println("El repartidor " + repartidor.getNombre()
+                + " tiene asignado el paquete: "+ this.gestorRepartidores.consultarPaquete(repartidor));
+    }
+
+    /**
+     * Consulta el repartidor asignado a un paquete
+     * @param idPaquete
+     */
+    public void consultarRepartidor(String idPaquete){
+        System.out.println("El paquete con id " + idPaquete + " tiene asignado el repartidor: " + this.gestorRepartidores.consultarRepartidor(idPaquete));
+    }
+
+    public void consultarRepartidores(boolean Disponibles){
+        System.out.println("--- Disponibilidad de repartidores ---");
+        gestorRepartidores.consultarRepartidores(Disponibles);
     }
 
     // ===================================================================
@@ -150,7 +225,7 @@ public class CentroDistribucion {
         }
         System.out.println(sb);
         EstructuraPrioritaria orden_comparator = new EstructuraPrioritaria(comparador);
-        // Lógica de impresión usando ComparadorPeso
+        // Lógica de impresión usando un comp
         orden_comparator.copyAll(historialLlegada.getPaquetes());
         System.out.println(orden_comparator);
         System.out.println("Presione Enter para continuar...");

@@ -45,6 +45,7 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
     public void removePaquete(Paquete paquete) {
         if (!this.paquetes.containsKey(paquete.getDestino())){throw new RuntimeException("El destino no esta incluido");}
         ArrayList<Paquete> paquetes = this.paquetes.get(paquete.getDestino());
+        if (!paquetes.contains(paquete)){throw new RuntimeException("El paquete no esta incluido en el destino");}
         paquetes.remove(paquete);
         if (paquetes.isEmpty()){
             this.paquetes.remove(paquete.getDestino());
@@ -67,6 +68,9 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
         }
         return null;
 
+    }
+    public ArrayList<Paquete> getDestinoPaquete(Destino destino){
+        return this.paquetes.get(destino);
     }
     //Obtener el tamaño del hashmap.
     @Override

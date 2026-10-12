@@ -4,6 +4,7 @@ import Remodelado.Bases.Comparadores.ComparadorPrioritario;
 import Remodelado.Bases.Comparadores.ComparadorTiempo;
 import Remodelado.Bases.Estructuras.*;
 import Remodelado.Bases.modelo.Paquete;
+import Remodelado.Bases.modelo.Repartidor;
 import Remodelado.Enum.Destino;
 
 import java.util.HashMap;
@@ -15,9 +16,111 @@ public class Main {
     public static void main(String[] args) {
         final CentroDistribucion quindioExpress = new CentroDistribucion();
         generarPaquetes(quindioExpress);
-        menuPrincipal(quindioExpress);
+        generarRepartidores(quindioExpress);
+        int opcion;
+        do {
+            System.out.println("\n===== MENU PRINCIPAL =====");
+            System.out.println("1. Administracion");
+            System.out.println("2. Repartidores");
+            System.out.println("3. Salir");
 
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    menuPrincipalAdmin(quindioExpress);
+                    break;
+
+                case 2:
+                    menuPrincipalRepartidor(quindioExpress);
+                    break;
+
+                case 3:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+
+                default:
+                    System.out.println("Opcion no valida");
+            }
+
+        } while (opcion != 3);
+        sc.close();
     }
+
+
+    // Area repartidor
+    public static void menuPrincipalRepartidor(CentroDistribucion CD) {
+        int opcion;
+
+        do {
+            System.out.println("\n===== MENU PRINCIPAL REPARTIDORES =====");
+            System.out.println("1. Consultar repartidor por ID");
+            System.out.println("2. Consultar paquete asignado");
+            System.out.println("3. Registrar entrega de paquete");
+            System.out.println("4. Asignar el siguiente paquete a un repartidor");
+            System.out.println("5. Imprimir repartidores disponibles");
+            System.out.println("6. Imprimir repartidores ocupados");
+            System.out.println("7. Volver al menu principal");
+            System.out.print("Seleccione una opcion: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese ID del repartidor: ");
+                    String id = sc.nextLine();
+
+                    System.out.println(CD.buscarRepartidor(id));
+                    break;
+
+                case 2:
+                    System.out.print("Ingrese ID del repartidor: ");
+                    id = sc.nextLine();
+
+                    Repartidor repartidor = CD.buscarRepartidor(id);
+
+                    if (repartidor != null) {
+                        CD.consultarPaquete(repartidor);
+                    } else {
+                        System.out.println("El repartidor no existe.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Ingrese codigo del paquete entregado: ");
+                    String codigo = sc.nextLine();
+
+                    try {
+                        CD.liberacionRepartidor(codigo);
+                        System.out.println("Entrega registrada correctamente.");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 4:
+                    System.out.print("Ingrese codigo del repartidor: ");
+                    id = sc.nextLine();
+                    CD.asignacionRepartidor(id);
+                    break;
+                case 5:
+                    CD.consultarRepartidores(true);
+                    break;
+                case 6:
+                    CD.consultarRepartidores(false);
+                    break;
+                case 7:
+                    System.out.println("Volviendo al menu principal...");
+                    break;
+
+                default:
+                    System.out.println("Opcion no valida.");
+            }
+
+        } while (opcion != 7);
+    }
+
+    //Area paquetes
     public static void generarPaquetes(CentroDistribucion CD){
         HashMap<String, Object> p1 = new HashMap<>();
         p1.put("Codigo", "PQ027");
@@ -315,7 +418,29 @@ public class Main {
         Paquete paquete30 = new Paquete(p30);
         CD.registrarPaquete(paquete30);
     }
-    public static void menuPrincipal(CentroDistribucion CD){
+    public static void generarRepartidores(CentroDistribucion CD){
+        Repartidor r1 = new Repartidor("1094832156", "Juan", Destino.Armenia, true);
+        CD.registrarRepartidor(r1);
+
+        Repartidor r2 = new Repartidor("71294830", "Maria", Destino.Salento, true);
+        CD.registrarRepartidor(r2);
+
+        Repartidor r3 = new Repartidor("1088349201", "Carlos", Destino.Circasia, true);
+        CD.registrarRepartidor(r3);
+
+        Repartidor r4 = new Repartidor("94382194", "Ana", Destino.Filandia, true);
+        CD.registrarRepartidor(r4);
+
+        Repartidor r5 = new Repartidor("1095928341", "Luis", Destino.Montenegro, true);
+        CD.registrarRepartidor(r5);
+        Repartidor r6 = new Repartidor("1073629182", "Sofia", Destino.Armenia, true);
+        CD.registrarRepartidor(r6);
+        CD.asignacionRepartidor("71294830");
+        CD.asignacionRepartidor("1088349201");
+        CD.asignacionRepartidor("94382194");
+
+    }
+    public static void menuPrincipalAdmin(CentroDistribucion CD){
         int opcion ;
         do {
             System.out.println("\n===== MENU PRINCIPAL =====");
@@ -343,7 +468,7 @@ public class Main {
                     break;
             }
         } while (opcion !=5);
-        sc.close();
+
     }
     public static void imprimirReporte(CentroDistribucion CD){
         int opcion;
@@ -421,8 +546,7 @@ public class Main {
             System.out.println("\n===== Administracion de paquetes =====");
             System.out.println("1. Crear paquete");
             System.out.println("2. Eliminar paquete");
-            System.out.println("3. Obtener siguiente paquete por despachar");
-            System.out.println("4. Volver al menu principal");
+            System.out.println("3. Volver al menu principal");
             opcion = sc.nextInt();
             sc.nextLine();
             switch (opcion){
@@ -435,11 +559,8 @@ public class Main {
                     CD.eliminarPaquete(codigo);
                     break;
                 case 3:
-                    System.out.println("El siguiente paquete a despachar es: ");
-                    System.out.println(CD.despacharSiguienteUrgente());
-                    break;
-                case 4:
                     System.out.println("Volviendo al menu principal");
+                    break;
                 default:
                     System.out.println("Opcion no valida");
             }
