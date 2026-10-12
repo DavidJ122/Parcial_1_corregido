@@ -4,7 +4,9 @@ import Remodelado.Bases.Comparadores.ComparadorPeso;
 import Remodelado.Bases.Comparadores.ComparadorPrioritario;
 import Remodelado.Bases.Estructuras.*;
 import Remodelado.Bases.Paquete;
+import Remodelado.Bases.Recursivos.BusquedaCodigo;
 import Remodelado.Enum.Destino;
+import Remodelado.ListCustom.List;
 
 import java.util.HashMap;
 
@@ -32,12 +34,26 @@ public class Main {
         //printD(estructuraDestino,estructuraLlegada);
         //EstructuraFIFO estructuraFIFO = new EstructuraFIFO();
         //printFIFO(estructuraFIFO,estructuraLlegada);
-        EstructuraPrioritaria estructuraPrioritaria = null;
-        printPri(estructuraPrioritaria,estructuraLlegada);
-
-
-
-
+        //EstructuraPrioritaria estructuraPrioritaria = null;
+        //printPri(estructuraPrioritaria,estructuraLlegada);
+        //List<Paquete> listaPaquetes = new List<>();
+        //listaPaquetes.add(estructuraFIFO.getFirst());
+        //listaPaquetes.add(estructuraFIFO.getFirst());
+        //listaPaquetes.add(estructuraFIFO.getFirst());
+        //listaPaquetes.add(estructuraFIFO.getFirst());
+        //listaPaquetes.add(estructuraFIFO.getFirst());
+        //System.out.println("Lista generica simplemente enlazada: ");
+        //System.out.println(listaPaquetes);
+        //System.out.println("Longitud de la lista: ");
+        //System.out.println(listaPaquetes.lenght());
+        //System.out.println("Quinto elemento de la lista: ");
+        //System.out.println(listaPaquetes.getSlot(3));
+        Paquete paquete_codigo = new BusquedaCodigo().Buscar(estructuraPrincipal.getPaquetes(), "PD003");
+        Paquete paquete_codigo2 = new BusquedaCodigo().Buscar(estructuraPrincipal.getPaquetes(), "PD000");
+        Paquete paquete_codigo3 = new BusquedaCodigo().Buscar(estructuraPrincipal.getPaquetes(), "PD014");
+        System.out.println("Paquete 1 con codigo: " + paquete_codigo.getCodigo());
+        System.out.println("Paquete 2 con codigo: " + paquete_codigo2.getCodigo());
+        System.out.println("Paquete 3 con codigo: " + paquete_codigo3.getCodigo());
 
 
 

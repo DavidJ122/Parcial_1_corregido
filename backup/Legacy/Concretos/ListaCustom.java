@@ -3,7 +3,7 @@ package Legacy.Concretos;
 import Legacy.Interfaces.QLista;
 
 import java.util.Iterator;
-import Remodelado.Enum.Shuffle;
+
 import Legacy.Metodos_Sort.*;
 //Lista
 public class ListaCustom implements QLista<Paquete> {

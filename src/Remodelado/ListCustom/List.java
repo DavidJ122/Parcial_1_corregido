@@ -38,11 +38,15 @@ public class List<T> implements Iterable<T>{
     public void setHeader(Nodo<T> nodo){
         this.header=nodo;
     }
-    public Nodo<T> getHeader(){
+    private Nodo<T> getHeader(){
         return this.header;
     }
     public boolean isEmpty(){
         return header == null;
+    }
+    @Override
+    public String toString(){
+        return this.header.toString();
     }
 
 

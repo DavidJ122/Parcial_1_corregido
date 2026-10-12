@@ -7,6 +7,6 @@ import java.util.Comparator;
 public class ComparadorPeso implements Comparator<Paquete> {
     @Override
     public int compare(Paquete o1, Paquete o2) {
-        return Float.compare(o2.getPeso(), o1.getPeso());
+        return Double.compare(o2.getPeso(), o1.getPeso());
     }
 }

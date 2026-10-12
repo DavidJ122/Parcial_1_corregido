@@ -7,7 +7,7 @@ import Remodelado.Enum.Destino;
 public class Paquete implements Comparable<Paquete>{
     private String Codigo;
     private Destino destino;
-    private float peso;
+    private double peso;
     private int Prioridad;
     private int Tiempo_estimado;
 
@@ -76,12 +76,12 @@ public class Paquete implements Comparable<Paquete>{
         return this.destino;
     }
 
-    private void setPeso(float peso){
+    private void setPeso(double peso){
         if (peso<=0) { throw new IllegalArgumentException("El peso debe ser mayor a 0");}
         this.peso=peso;
     }
 
-    public float getPeso(){
+    public double getPeso(){
         return this.peso;
     }
 

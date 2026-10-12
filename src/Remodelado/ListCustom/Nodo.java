@@ -71,4 +71,9 @@ public class Nodo<T>{
     public T getDato(){
         return this.dato;
     }
+    @Override
+    public String toString(){
+        if (this.next == null){return this.dato.toString();}
+        return this.dato.toString() + " -> "+ this.next.toString();
+    }
 }
