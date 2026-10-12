@@ -3,7 +3,7 @@ import Remodelado.Bases.Comparadores.ComparadorTiempo;
 import Remodelado.Bases.Comparadores.ComparadorPeso;
 import Remodelado.Bases.Comparadores.ComparadorPrioritario;
 import Remodelado.Bases.Estructuras.*;
-import Remodelado.Bases.Paquete;
+import Remodelado.Bases.modelo.Paquete;
 import Remodelado.Enum.Destino;
 
 import java.util.HashMap;

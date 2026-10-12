@@ -1,37 +1,37 @@
 package Remodelado.Bases.Estructuras;
 
-import Remodelado.Bases.Comparadores.ComparadorDespacho;
-import Remodelado.Bases.Paquete;
-
+import Remodelado.Bases.modelo.Paquete;
 import java.util.*;
 
-public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>,String> {
-    PriorityQueue<Paquete> paquetes;
+public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>, String> {
 
-    public EstructuraPrioritaria(Comparator<Paquete> comparador){
+    private PriorityQueue<Paquete> paquetes;
+
+    public EstructuraPrioritaria(Comparator<Paquete> comparador) {
         this.paquetes = new PriorityQueue<>(comparador);
     }
+
     @Override
     public PriorityQueue<Paquete> getPaquetes() {
         return paquetes;
     }
-
 
     public void setPaquetes(PriorityQueue<Paquete> paquetes) {
         this.paquetes = paquetes;
     }
 
     @Override
-    public void addPaquete(Paquete paquete){
+    public void addPaquete(Paquete paquete) {
         this.paquetes.add(paquete);
     }
 
     @Override
-    public void removePaquete(Paquete paquete){
+    public void removePaquete(Paquete paquete) {
         this.paquetes.remove(paquete);
     }
+
     @Override
-    public Paquete getPaquete(String Codigo){
+    public Paquete getPaquete(String Codigo) {
         for (Paquete p : this.paquetes) {
             if (Objects.equals(p.getCodigo(), Codigo)) {
                 return p;
@@ -39,13 +39,14 @@ public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>
         }
         return null;
     }
+
     @Override
-    public int getSize(){
+    public int getSize() {
         return this.paquetes.size();
     }
 
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return this.paquetes.isEmpty();
     }
 
@@ -53,21 +54,27 @@ public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>
     public void copyAll(Collection<Paquete> paquetes) {
         this.paquetes.addAll(paquetes);
     }
-    public Paquete getFirst(){
+
+    public Paquete extraerSiguiente() {
         return this.paquetes.poll();
     }
-    private void replace(ArrayList<Paquete> paquetes){
+
+    private void replace(ArrayList<Paquete> paquetes) {
         this.clear();
         this.paquetes.addAll(paquetes);
     }
-    private void clear(){
+
+    private void clear() {
         this.paquetes.clear();
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
+        PriorityQueue<Paquete> copia = new PriorityQueue<>(this.paquetes);
         StringBuilder sb = new StringBuilder();
-        while (!this.isEmpty()) {
-            sb.append(paquetes.poll());
+
+        while (!copia.isEmpty()) {
+            sb.append(copia.poll());
             sb.append("\n");
         }
         return sb.toString();

@@ -1,4 +1,4 @@
-package Remodelado.Bases;
+package Remodelado.Bases.modelo;
 
 import java.util.HashMap;
 import java.util.Random;
