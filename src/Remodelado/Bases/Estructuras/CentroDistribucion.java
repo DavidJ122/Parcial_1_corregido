@@ -2,6 +2,7 @@ package Remodelado.Bases.Estructuras;
 
 import Remodelado.Bases.modelo.Paquete;
 import Remodelado.Bases.Comparadores.*;
+import Remodelado.ListCustom.List;
 
 /**
  * Clase principal que actúa como Fachada (Facade).
@@ -14,17 +15,19 @@ public class CentroDistribucion {
     private final EstructuraPrioritaria colaDespacho;
     private final EstructuraDestino paquetesPorDestino;
     private final EstructuraOrdenID registroPorId;
+    private final List<Paquete> historialPaquetes;
 
     // (Opcional) Si manejan repartidores en una estructura propia o estándar
     private final EstructuraFIFO colaEntregasNormales;
 
-    public CentroDistribucion() {
+    public CentroDistribucion(List<Paquete> historialPaquetes) {
+
         // Inicializamos las estructuras
         this.historialLlegada = new EstructuraLlegada();
         this.paquetesPorDestino = new EstructuraDestino();
         this.registroPorId = new EstructuraOrdenID();
         this.colaEntregasNormales = new EstructuraFIFO();
-
+        this.historialPaquetes = historialPaquetes; // Lista simplemente enlazada
         // La estructura prioritaria recibe el comparador compuesto complejo
         this.colaDespacho = new EstructuraPrioritaria(new ComparadorDespacho());
     }
@@ -45,7 +48,7 @@ public class CentroDistribucion {
         registroPorId.addPaquete(paquete);
 
         // 3. Agrupar por ciudad destino
-        paquetesPorDestino.agregarPorDestino(paquete.getDestino(), paquete);
+        paquetesPorDestino.addPaquete(paquete);
 
         // 4. Enviar a la cola de prioridad para ser despachado
         colaDespacho.addPaquete(paquete);
@@ -58,14 +61,15 @@ public class CentroDistribucion {
         if (colaDespacho.isEmpty()) {
             return null;
         }
-        return colaDespacho.extraerSiguiente(); // Internamente usa O(log n)
+        this.historialPaquetes.add(colaDespacho.getPaquetes().peek());
+        return colaDespacho.getFirst(); // Internamente usa O(log n)
     }
 
     /**
      * BÚSQUEDA DIRECTA: Utiliza la estructura especializada de IDs
      */
     public Paquete buscarPaquete(String codigoId) {
-        return registroPorId.buscarPorId(codigoId);
+        return registroPorId.getPaquete(codigoId);
     }
 
     // ===================================================================
@@ -79,7 +83,10 @@ public class CentroDistribucion {
         // Asumiendo que historialLlegada puede retornar una lista para ordenar
         // o que tu estructura tiene un método de ordenamiento.
         System.out.println("--- Reporte por Peso (Descendente) ---");
+        EstructuraPrioritaria orden_peso = new EstructuraPrioritaria(new ComparadorPeso());
         // Lógica de impresión usando ComparadorPeso
+        orden_peso.copyAll(historialLlegada.getPaquetes());
+        System.out.println(orden_peso);
     }
 
     /**
@@ -87,6 +94,9 @@ public class CentroDistribucion {
      */
     public void imprimirReportePorTiempoEstimado() {
         System.out.println("--- Reporte por Tiempo Estimado (Ascendente) ---");
+        EstructuraPrioritaria orden_tiempo = new EstructuraPrioritaria(new ComparadorTiempo());
+        orden_tiempo.copyAll(historialLlegada.getPaquetes());
+        System.out.println(orden_tiempo);
         // Si tuvieras que ordenar una lista nativa en este punto, usarías:
         // lista.sort(Comparator.comparingInt(Paquete::getTiempoEstimado));
     }
