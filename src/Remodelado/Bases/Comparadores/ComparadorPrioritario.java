@@ -1,6 +1,6 @@
 package Remodelado.Bases.Comparadores;
 
-import Remodelado.Bases.Paquete;
+import Remodelado.Bases.modelo.Paquete;
 
 import java.util.Comparator;
 

@@ -1,7 +1,6 @@
 package Remodelado.Bases.Estructuras;
 
-import Remodelado.Bases.Comparadores.ComparadorDespacho;
-import Remodelado.Bases.Paquete;
+import Remodelado.Bases.modelo.Paquete;
 
 import java.util.*;
 

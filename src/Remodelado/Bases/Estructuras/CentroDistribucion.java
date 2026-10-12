@@ -1,12 +1,7 @@
 package Remodelado.Bases.Estructuras;
 
 import Remodelado.Bases.modelo.Paquete;
-import Remodelado.Bases.modelo.Repartidor;
-import Remodelado.Enum.Destino;
-import Remodelado.Bases.Estructuras.*;
 import Remodelado.Bases.Comparadores.*;
-
-import java.util.Comparator;
 
 /**
  * Clase principal que actúa como Fachada (Facade).

@@ -1,8 +1,9 @@
 package Remodelado.Bases.Recursivos;
 
-import Remodelado.Bases.Paquete;
 
-import java.lang.reflect.Array;
+
+import Remodelado.Bases.modelo.Paquete;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
