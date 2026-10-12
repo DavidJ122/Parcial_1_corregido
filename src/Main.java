@@ -1,303 +1,565 @@
+import Remodelado.Bases.Comparadores.ComparadorDespacho;
+import Remodelado.Bases.Comparadores.ComparadorPeso;
+import Remodelado.Bases.Comparadores.ComparadorPrioritario;
+import Remodelado.Bases.Comparadores.ComparadorTiempo;
 import Remodelado.Bases.Estructuras.*;
 import Remodelado.Bases.modelo.Paquete;
 import Remodelado.Enum.Destino;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 //Main
 public class Main {
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        CentroDistribucion quindioExpress = new CentroDistribucion();
+        final CentroDistribucion quindioExpress = new CentroDistribucion();
+        generarPaquetes(quindioExpress);
+        menuPrincipal(quindioExpress);
+        //quindioExpress.imprimirReportePorTipoEstructura("Auditoria");
+        //quindioExpress.imprimirReportePorTipoEstructura("Destino");
+        //quindioExpress.imprimirReportePorTipoEstructura("OrdenID");
+        //quindioExpress.imprimirReportePorTipoEstructura("Despacho");
+        //quindioExpress.imprimirReportePorTipoEstructura("ListaSimple");
 
 
 
     }
-    public static void generarPaquetes(EstructuraOrdenID estructuraPrincipal, EstructuraAuditoria estructuraAuditoria){
+    public static void generarPaquetes(CentroDistribucion CD){
+        HashMap<String, Object> p1 = new HashMap<>();
+        p1.put("Codigo", "PQ027");
+        p1.put("Destino", Destino.Armenia);
+        p1.put("Peso", 2.5);
+        p1.put("Prioridad", 3);
+        p1.put("Tiempo_estimado", 12);
 
-        //Declaracion de variables
+        HashMap<String, Object> p2 = new HashMap<>();
+        p2.put("Codigo", "PQ004");
+        p2.put("Destino", Destino.Salento);
+        p2.put("Peso", 1.2);
+        p2.put("Prioridad", 5);
+        p2.put("Tiempo_estimado", 25);
 
-        //Datos de los paquetes
-        HashMap<String, Object> datos1 = new HashMap<>();
-        datos1.put("Codigo", "PD000");
-        datos1.put("Destino", Destino.Armenia);
-        datos1.put("Peso", 100);
-        datos1.put("Prioridad", 1);
-        datos1.put("Tiempo_estimado", 10);
-        Paquete paquete1 = new Paquete(datos1);
-        estructuraPrincipal.addPaquete(paquete1);
-        estructuraAuditoria.addPaquete(paquete1);
+        HashMap<String, Object> p3 = new HashMap<>();
+        p3.put("Codigo", "PQ019");
+        p3.put("Destino", Destino.Circasia);
+        p3.put("Peso", 4.8);
+        p3.put("Tiempo_estimado", 18);
 
-        HashMap<String, Object> datos2 = new HashMap<>();
-        datos2.put("Destino", Destino.Pereira);
-        datos2.put("Peso", 250);
-        datos2.put("Prioridad", 3);
-        datos2.put("Tiempo_estimado", 20);
-        Paquete paquete2 = new Paquete(datos2);
-        estructuraPrincipal.addPaquete(paquete2);
-        estructuraAuditoria.addPaquete(paquete2);
+        HashMap<String, Object> p4 = new HashMap<>();
+        p4.put("Codigo", "PQ002");
+        p4.put("Destino", Destino.Filandia);
+        p4.put("Peso", 3.1);
+        p4.put("Prioridad", 2);
+        p4.put("Tiempo_estimado", 30);
 
+        HashMap<String, Object> p5 = new HashMap<>();
+        p5.put("Codigo", "PQ025");
+        p5.put("Destino", Destino.Montenegro);
+        p5.put("Peso", 0.8);
+        p5.put("Prioridad", 4);
+        p5.put("Tiempo_estimado", 10);
 
-        HashMap<String, Object> datos3 = new HashMap<>();
-        datos3.put("Codigo", "PD002");
-        datos3.put("Destino", Destino.Circacia);
-        datos3.put("Peso", 50);
-        datos3.put("Tiempo_estimado", 15);
-        Paquete paquete3 = new Paquete(datos3);
-        estructuraPrincipal.addPaquete(paquete3);
-        estructuraAuditoria.addPaquete(paquete3);
+        HashMap<String, Object> p6 = new HashMap<>();
+        p6.put("Codigo", "PQ011");
+        p6.put("Destino", Destino.Armenia);
+        p6.put("Peso", 6.0);
+        p6.put("Prioridad", 1);
+        p6.put("Tiempo_estimado", 15);
 
+        HashMap<String, Object> p7 = new HashMap<>();
+        p7.put("Codigo", "PQ030");
+        p7.put("Destino", Destino.Salento);
+        p7.put("Peso", 2.3);
+        p7.put("Tiempo_estimado", 28);
 
+        HashMap<String, Object> p8 = new HashMap<>();
+        p8.put("Codigo", "PQ008");
+        p8.put("Destino", Destino.Circasia);
+        p8.put("Peso", 1.7);
+        p8.put("Prioridad", 3);
+        p8.put("Tiempo_estimado", 14);
 
-        HashMap<String, Object> datos4 = new HashMap<>();
-        datos4.put("Codigo", "PD003");
-        datos4.put("Destino", Destino.El_valle);
-        datos4.put("Peso", 120);
-        datos4.put("Prioridad", 5);
-        datos4.put("Tiempo_estimado", 30);
-        Paquete paquete4 = new Paquete(datos4);
-        estructuraPrincipal.addPaquete(paquete4);
-        estructuraAuditoria.addPaquete(paquete4);
+        HashMap<String, Object> p9 = new HashMap<>();
+        p9.put("Codigo", "PQ016");
+        p9.put("Destino", Destino.Filandia);
+        p9.put("Peso", 5.2);
+        p9.put("Prioridad", 5);
+        p9.put("Tiempo_estimado", 35);
 
-        HashMap<String, Object> datos5 = new HashMap<>();
-        datos5.put("Destino", Destino.Armenia);
-        datos5.put("Peso", 80);
-        datos5.put("Tiempo_estimado", 12);
-        Paquete paquete5 = new Paquete(datos5);
-        estructuraPrincipal.addPaquete(paquete5);
-        estructuraAuditoria.addPaquete(paquete5);
+        HashMap<String, Object> p10 = new HashMap<>();
+        p10.put("Codigo", "PQ001");
+        p10.put("Destino", Destino.Montenegro);
+        p10.put("Peso", 3.6);
+        p10.put("Prioridad", 2);
+        p10.put("Tiempo_estimado", 20);
 
-        HashMap<String, Object> datos6 = new HashMap<>();
-        datos6.put("Codigo", "PD005");
-        datos6.put("Destino", Destino.Pereira);
-        datos6.put("Peso", 300);
-        datos6.put("Prioridad", 1);
-        datos6.put("Tiempo_estimado", 25);
-        Paquete paquete6 = new Paquete(datos6);
-        estructuraPrincipal.addPaquete(paquete6);
-        estructuraAuditoria.addPaquete(paquete6);
+        HashMap<String, Object> p11 = new HashMap<>();
+        p11.put("Codigo", "PQ022");
+        p11.put("Destino", Destino.Armenia);
+        p11.put("Peso", 1.1);
+        p11.put("Prioridad", 4);
+        p11.put("Tiempo_estimado", 8);
 
-        HashMap<String, Object> datos7 = new HashMap<>();
-        datos7.put("Codigo", "PD006");
-        datos7.put("Destino", Destino.Circacia);
-        datos7.put("Peso", 175);
-        datos7.put("Prioridad", 3);
-        datos7.put("Tiempo_estimado", 18);
-        Paquete paquete7 = new Paquete(datos7);
-        estructuraPrincipal.addPaquete(paquete7);
-        estructuraAuditoria.addPaquete(paquete7);
+        HashMap<String, Object> p12 = new HashMap<>();
+        p12.put("Codigo", "PQ006");
+        p12.put("Destino", Destino.Salento);
+        p12.put("Peso", 7.4);
+        p12.put("Prioridad", 1);
+        p12.put("Tiempo_estimado", 40);
 
-        HashMap<String, Object> datos8 = new HashMap<>();
-        datos8.put("Destino", Destino.El_valle);
-        datos8.put("Peso", 60);
-        datos8.put("Prioridad", 2);
-        datos8.put("Tiempo_estimado", 8);
-        Paquete paquete8 = new Paquete(datos8);
-        estructuraPrincipal.addPaquete(paquete8);
-        estructuraAuditoria.addPaquete(paquete8);
+        HashMap<String, Object> p13 = new HashMap<>();
+        p13.put("Codigo", "PQ013");
+        p13.put("Destino", Destino.Circasia);
+        p13.put("Peso", 2.9);
+        p13.put("Prioridad", 3);
+        p13.put("Tiempo_estimado", 16);
 
-        HashMap<String, Object> datos9 = new HashMap<>();
-        datos9.put("Codigo", "PD008");
-        datos9.put("Destino", Destino.Armenia);
-        datos9.put("Peso", 220);
-        datos9.put("Tiempo_estimado", 22);
-        Paquete paquete9 = new Paquete(datos9);
-        estructuraPrincipal.addPaquete(paquete9);
-        estructuraAuditoria.addPaquete(paquete9);
+        HashMap<String, Object> p14 = new HashMap<>();
+        p14.put("Codigo", "PQ029");
+        p14.put("Destino", Destino.Filandia);
+        p14.put("Peso", 0.5);
+        p14.put("Tiempo_estimado", 32);
 
-        HashMap<String, Object> datos10 = new HashMap<>();
-        datos10.put("Destino", Destino.Pereira);
-        datos10.put("Peso", 90);
-        datos10.put("Prioridad", 2);
-        datos10.put("Tiempo_estimado", 14);
-        Paquete paquete10 = new Paquete(datos10);
-        estructuraPrincipal.addPaquete(paquete10);
-        estructuraAuditoria.addPaquete(paquete10);
+        HashMap<String, Object> p15 = new HashMap<>();
+        p15.put("Codigo", "PQ009");
+        p15.put("Destino", Destino.Montenegro);
+        p15.put("Peso", 4.2);
+        p15.put("Prioridad", 5);
+        p15.put("Tiempo_estimado", 22);
 
-        HashMap<String, Object> datos11 = new HashMap<>();
-        datos11.put("Codigo", "PD010");
-        datos11.put("Destino", Destino.Circacia);
-        datos11.put("Peso", 400);
-        datos11.put("Prioridad", 4);
-        datos11.put("Tiempo_estimado", 35);
-        Paquete paquete11 = new Paquete(datos11);
-        estructuraPrincipal.addPaquete(paquete11);
-        estructuraAuditoria.addPaquete(paquete11);
+        HashMap<String, Object> p16 = new HashMap<>();
+        p16.put("Codigo", "PQ018");
+        p16.put("Destino", Destino.Armenia);
+        p16.put("Peso", 8.1);
+        p16.put("Prioridad", 2);
+        p16.put("Tiempo_estimado", 11);
 
-        HashMap<String, Object> datos12 = new HashMap<>();
-        datos12.put("Destino", Destino.El_valle);
-        datos12.put("Peso", 135);
-        datos12.put("Tiempo_estimado", 16);
-        Paquete paquete12 = new Paquete(datos12);
-        estructuraPrincipal.addPaquete(paquete12);
-        estructuraAuditoria.addPaquete(paquete12);
+        HashMap<String, Object> p17 = new HashMap<>();
+        p17.put("Codigo", "PQ003");
+        p17.put("Destino", Destino.Salento);
+        p17.put("Peso", 3.4);
+        p17.put("Prioridad", 4);
+        p17.put("Tiempo_estimado", 27);
 
-        HashMap<String, Object> datos13 = new HashMap<>();
-        datos13.put("Codigo", "PD012");
-        datos13.put("Destino", Destino.Armenia);
-        datos13.put("Peso", 45);
-        datos13.put("Prioridad", 5);
-        datos13.put("Tiempo_estimado", 7);
-        Paquete paquete13 = new Paquete(datos13);
-        estructuraPrincipal.addPaquete(paquete13);
-        estructuraAuditoria.addPaquete(paquete13);
+        HashMap<String, Object> p18 = new HashMap<>();
+        p18.put("Codigo", "PQ024");
+        p18.put("Destino", Destino.Circasia);
+        p18.put("Peso", 1.9);
+        p18.put("Prioridad", 1);
+        p18.put("Tiempo_estimado", 13);
 
-        HashMap<String, Object> datos14 = new HashMap<>();
-        datos14.put("Destino", Destino.Pereira);
-        datos14.put("Peso", 190);
-        datos14.put("Prioridad", 1);
-        datos14.put("Tiempo_estimado", 19);
-        Paquete paquete14 = new Paquete(datos14);
-        estructuraPrincipal.addPaquete(paquete14);
-        estructuraAuditoria.addPaquete(paquete14);
+        HashMap<String, Object> p19 = new HashMap<>();
+        p19.put("Codigo", "PQ012");
+        p19.put("Destino", Destino.Filandia);
+        p19.put("Peso", 6.3);
+        p19.put("Prioridad", 3);
+        p19.put("Tiempo_estimado", 38);
 
-        HashMap<String, Object> datos15 = new HashMap<>();
-        datos15.put("Codigo", "PD014");
-        datos15.put("Destino", Destino.Circacia);
-        datos15.put("Peso", 275);
-        datos15.put("Tiempo_estimado", 28);
-        Paquete paquete15 = new Paquete(datos15);
-        estructuraPrincipal.addPaquete(paquete15);
-        estructuraAuditoria.addPaquete(paquete15);
+        HashMap<String, Object> p20 = new HashMap<>();
+        p20.put("Codigo", "PQ020");
+        p20.put("Destino", Destino.Montenegro);
+        p20.put("Peso", 2.1);
+        p20.put("Prioridad", 5);
+        p20.put("Tiempo_estimado", 17);
 
-        HashMap<String, Object> datos16 = new HashMap<>();
-        datos16.put("Codigo", "PD015");
-        datos16.put("Destino", Destino.El_valle);
-        datos16.put("Peso", 110);
-        datos16.put("Prioridad", 3);
-        datos16.put("Tiempo_estimado", 13);
-        Paquete paquete16 = new Paquete(datos16);
-        estructuraPrincipal.addPaquete(paquete16);
-        estructuraAuditoria.addPaquete(paquete16);
+        HashMap<String, Object> p21 = new HashMap<>();
+        p21.put("Codigo", "PQ005");
+        p21.put("Destino", Destino.Armenia);
+        p21.put("Peso", 3.8);
+        p21.put("Tiempo_estimado", 9);
 
-        HashMap<String, Object> datos17 = new HashMap<>();
-        datos17.put("Destino", Destino.Armenia);
-        datos17.put("Peso", 320);
-        datos17.put("Tiempo_estimado", 32);
-        Paquete paquete17 = new Paquete(datos17);
-        estructuraPrincipal.addPaquete(paquete17);
-        estructuraAuditoria.addPaquete(paquete17);
+        HashMap<String, Object> p22 = new HashMap<>();
+        p22.put("Codigo", "PQ026");
+        p22.put("Destino", Destino.Salento);
+        p22.put("Peso", 5.5);
+        p22.put("Prioridad", 2);
+        p22.put("Tiempo_estimado", 31);
 
-        HashMap<String, Object> datos18 = new HashMap<>();
-        datos18.put("Codigo", "PD017");
-        datos18.put("Destino", Destino.Pereira);
-        datos18.put("Peso", 70);
-        datos18.put("Prioridad", 4);
-        datos18.put("Tiempo_estimado", 9);
-        Paquete paquete18 = new Paquete(datos18);
-        estructuraPrincipal.addPaquete(paquete18);
-        estructuraAuditoria.addPaquete(paquete18);
+        HashMap<String, Object> p23 = new HashMap<>();
+        p23.put("Codigo", "PQ015");
+        p23.put("Destino", Destino.Circasia);
+        p23.put("Peso", 0.9);
+        p23.put("Prioridad", 4);
+        p23.put("Tiempo_estimado", 19);
 
-        HashMap<String, Object> datos19 = new HashMap<>();
-        datos19.put("Destino", Destino.Circacia);
-        datos19.put("Peso", 155);
-        datos19.put("Prioridad", 2);
-        datos19.put("Tiempo_estimado", 17);
-        Paquete paquete19 = new Paquete(datos19);
-        estructuraPrincipal.addPaquete(paquete19);
-        estructuraAuditoria.addPaquete(paquete19);
+        HashMap<String, Object> p24 = new HashMap<>();
+        p24.put("Codigo", "PQ007");
+        p24.put("Destino", Destino.Filandia);
+        p24.put("Peso", 4.6);
+        p24.put("Prioridad", 1);
+        p24.put("Tiempo_estimado", 26);
 
-        HashMap<String, Object> datos20 = new HashMap<>();
-        datos20.put("Codigo", "PD019");
-        datos20.put("Destino", Destino.El_valle);
-        datos20.put("Peso", 500);
-        datos20.put("Tiempo_estimado", 40);
-        Paquete paquete20 = new Paquete(datos20);
-        estructuraPrincipal.addPaquete(paquete20);
-        estructuraAuditoria.addPaquete(paquete20);
+        HashMap<String, Object> p25 = new HashMap<>();
+        p25.put("Codigo", "PQ021");
+        p25.put("Destino", Destino.Montenegro);
+        p25.put("Peso", 2.7);
+        p25.put("Prioridad", 3);
+        p25.put("Tiempo_estimado", 14);
 
-        HashMap<String, Object> datos21 = new HashMap<>();
-        datos21.put("Destino", Destino.Armenia);
-        datos21.put("Peso", 95);
-        datos21.put("Prioridad", 5);
-        datos21.put("Tiempo_estimado", 11);
-        Paquete paquete21 = new Paquete(datos21);
-        estructuraPrincipal.addPaquete(paquete21);
-        estructuraAuditoria.addPaquete(paquete21);
+        HashMap<String, Object> p26 = new HashMap<>();
+        p26.put("Codigo", "PQ014");
+        p26.put("Destino", Destino.Armenia);
+        p26.put("Peso", 9.2);
+        p26.put("Prioridad", 5);
+        p26.put("Tiempo_estimado", 42);
 
-        HashMap<String, Object> datos22 = new HashMap<>();
-        datos22.put("Codigo", "PD021");
-        datos22.put("Destino", Destino.Pereira);
-        datos22.put("Peso", 210);
-        datos22.put("Prioridad", 2);
-        datos22.put("Tiempo_estimado", 23);
-        Paquete paquete22 = new Paquete(datos22);
-        estructuraPrincipal.addPaquete(paquete22);
-        estructuraAuditoria.addPaquete(paquete22);
+        HashMap<String, Object> p27 = new HashMap<>();
+        p27.put("Codigo", "PQ028");
+        p27.put("Destino", Destino.Salento);
+        p27.put("Peso", 1.4);
+        p27.put("Tiempo_estimado", 24);
 
-        HashMap<String, Object> datos23 = new HashMap<>();
-        datos23.put("Destino", Destino.Circacia);
-        datos23.put("Peso", 30);
-        datos23.put("Tiempo_estimado", 6);
-        Paquete paquete23 = new Paquete(datos23);
-        estructuraPrincipal.addPaquete(paquete23);
-        estructuraAuditoria.addPaquete(paquete23);
+        HashMap<String, Object> p28 = new HashMap<>();
+        p28.put("Codigo", "PQ010");
+        p28.put("Destino", Destino.Circasia);
+        p28.put("Peso", 3.3);
+        p28.put("Prioridad", 2);
+        p28.put("Tiempo_estimado", 21);
 
-        HashMap<String, Object> datos24 = new HashMap<>();
-        datos24.put("Codigo", "PD023");
-        datos24.put("Destino", Destino.El_valle);
-        datos24.put("Peso", 180);
-        datos24.put("Prioridad", 1);
-        datos24.put("Tiempo_estimado", 21);
-        Paquete paquete24 = new Paquete(datos24);
-        estructuraPrincipal.addPaquete(paquete24);
-        estructuraAuditoria.addPaquete(paquete24);
+        HashMap<String, Object> p29 = new HashMap<>();
+        p29.put("Codigo", "PQ023");
+        p29.put("Destino", Destino.Filandia);
+        p29.put("Peso", 5.7);
+        p29.put("Prioridad", 4);
+        p29.put("Tiempo_estimado", 33);
 
-        HashMap<String, Object> datos25 = new HashMap<>();
-        datos25.put("Destino", Destino.Armenia);
-        datos25.put("Peso", 65);
-        datos25.put("Prioridad", 3);
-        datos25.put("Tiempo_estimado", 8);
-        Paquete paquete25 = new Paquete(datos25);
-        estructuraPrincipal.addPaquete(paquete25);
-        estructuraAuditoria.addPaquete(paquete25);
+        HashMap<String, Object> p30 = new HashMap<>();
+        p30.put("Codigo", "PQ017");
+        p30.put("Destino", Destino.Montenegro);
+        p30.put("Peso", 1.6);
+        p30.put("Prioridad", 1);
+        p30.put("Tiempo_estimado", 7);
 
-        HashMap<String, Object> datos26 = new HashMap<>();
-        datos26.put("Codigo", "PD025");
-        datos26.put("Destino", Destino.Pereira);
-        datos26.put("Peso", 350);
-        datos26.put("Tiempo_estimado", 34);
-        Paquete paquete26 = new Paquete(datos26);
-        estructuraPrincipal.addPaquete(paquete26);
-        estructuraAuditoria.addPaquete(paquete26);
+// Registro de paquetes
+        Paquete paquete1 = new Paquete(p1);
+        CD.registrarPaquete(paquete1);
 
-        HashMap<String, Object> datos27 = new HashMap<>();
-        datos27.put("Destino", Destino.Circacia);
-        datos27.put("Peso", 140);
-        datos27.put("Prioridad", 4);
-        datos27.put("Tiempo_estimado", 16);
-        Paquete paquete27 = new Paquete(datos27);
-        estructuraPrincipal.addPaquete(paquete27);
-        estructuraAuditoria.addPaquete(paquete27);
+        Paquete paquete2 = new Paquete(p2);
+        CD.registrarPaquete(paquete2);
 
-        HashMap<String, Object> datos28 = new HashMap<>();
-        datos28.put("Codigo", "PD027");
-        datos28.put("Destino", Destino.El_valle);
-        datos28.put("Peso", 230);
-        datos28.put("Prioridad", 5);
-        datos28.put("Tiempo_estimado", 24);
-        Paquete paquete28 = new Paquete(datos28);
-        estructuraPrincipal.addPaquete(paquete28);
-        estructuraAuditoria.addPaquete(paquete28);
+        Paquete paquete3 = new Paquete(p3);
+        CD.registrarPaquete(paquete3);
 
-        HashMap<String, Object> datos29 = new HashMap<>();
-        datos29.put("Destino", Destino.Armenia);
-        datos29.put("Peso", 85);
-        datos29.put("Tiempo_estimado", 10);
-        Paquete paquete29 = new Paquete(datos29);
-        estructuraPrincipal.addPaquete(paquete29);
-        estructuraAuditoria.addPaquete(paquete29);
+        Paquete paquete4 = new Paquete(p4);
+        CD.registrarPaquete(paquete4);
 
-        HashMap<String, Object> datos30 = new HashMap<>();
-        datos30.put("Codigo", "PD029");
-        datos30.put("Destino", Destino.Pereira);
-        datos30.put("Peso", 420);
-        datos30.put("Prioridad", 3);
-        datos30.put("Tiempo_estimado", 38);
-        Paquete paquete30 = new Paquete(datos30);
-        estructuraPrincipal.addPaquete(paquete30);
-        estructuraAuditoria.addPaquete(paquete30);
+        Paquete paquete5 = new Paquete(p5);
+        CD.registrarPaquete(paquete5);
+
+        Paquete paquete6 = new Paquete(p6);
+        CD.registrarPaquete(paquete6);
+
+        Paquete paquete7 = new Paquete(p7);
+        CD.registrarPaquete(paquete7);
+
+        Paquete paquete8 = new Paquete(p8);
+        CD.registrarPaquete(paquete8);
+
+        Paquete paquete9 = new Paquete(p9);
+        CD.registrarPaquete(paquete9);
+
+        Paquete paquete10 = new Paquete(p10);
+        CD.registrarPaquete(paquete10);
+
+        Paquete paquete11 = new Paquete(p11);
+        CD.registrarPaquete(paquete11);
+
+        Paquete paquete12 = new Paquete(p12);
+        CD.registrarPaquete(paquete12);
+
+        Paquete paquete13 = new Paquete(p13);
+        CD.registrarPaquete(paquete13);
+
+        Paquete paquete14 = new Paquete(p14);
+        CD.registrarPaquete(paquete14);
+
+        Paquete paquete15 = new Paquete(p15);
+        CD.registrarPaquete(paquete15);
+
+        Paquete paquete16 = new Paquete(p16);
+        CD.registrarPaquete(paquete16);
+
+        Paquete paquete17 = new Paquete(p17);
+        CD.registrarPaquete(paquete17);
+
+        Paquete paquete18 = new Paquete(p18);
+        CD.registrarPaquete(paquete18);
+
+        Paquete paquete19 = new Paquete(p19);
+        CD.registrarPaquete(paquete19);
+
+        Paquete paquete20 = new Paquete(p20);
+        CD.registrarPaquete(paquete20);
+
+        Paquete paquete21 = new Paquete(p21);
+        CD.registrarPaquete(paquete21);
+
+        Paquete paquete22 = new Paquete(p22);
+        CD.registrarPaquete(paquete22);
+
+        Paquete paquete23 = new Paquete(p23);
+        CD.registrarPaquete(paquete23);
+
+        Paquete paquete24 = new Paquete(p24);
+        CD.registrarPaquete(paquete24);
+
+        Paquete paquete25 = new Paquete(p25);
+        CD.registrarPaquete(paquete25);
+
+        Paquete paquete26 = new Paquete(p26);
+        CD.registrarPaquete(paquete26);
+
+        Paquete paquete27 = new Paquete(p27);
+        CD.registrarPaquete(paquete27);
+
+        Paquete paquete28 = new Paquete(p28);
+        CD.registrarPaquete(paquete28);
+
+        Paquete paquete29 = new Paquete(p29);
+        CD.registrarPaquete(paquete29);
+
+        Paquete paquete30 = new Paquete(p30);
+        CD.registrarPaquete(paquete30);
     }
+    public static void menuPrincipal(CentroDistribucion CD){
+        int opcion ;
+        do {
+            System.out.println("\n===== MENU PRINCIPAL =====");
+            System.out.println("1. Administracion de paquetes");
+            System.out.println("2. Consultar paquetes");
+            System.out.println("3. Imprimir reporte");
+            System.out.println("4. Salir");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    menuAdministracion(CD);
+                    break;
+                case 2:
+                    consultarPaquetes(CD);
+                    break;
+                case 3:
+                    imprimirReporte(CD);
+                    break;
+                case 4:
+                    System.out.println("Saliendo...");
+            }
+        } while (opcion !=4);
+        sc.close();
+    }
+    public static void imprimirReporte(CentroDistribucion CD){
+        int opcion;
+        do{
+            System.out.println("\n===== Reportes =====");
+            System.out.println("1. Reporte de paquetes por prioridad");
+            System.out.println("2. Reporte de paquetes por despacho");
+            System.out.println("3. Reporte de paquetes por peso");
+            System.out.println("4. Reporte de paquetes por tiempo estimado");
+            System.out.println("5. Reporte de historial de paquetes");
+            System.out.println("6. Volver al menu principal");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion){
+                case 1:
+                    CD.imprimirReportePorComparador(new ComparadorPrioritario());
+                    break;
+                case 2:
+                    CD.imprimirReportePorComparador(new ComparadorDespacho());
+                    break;
+                case 3:
+                    CD.imprimirReportePorComparador(new ComparadorPeso());
+                    break;
+                case 4:
+                    CD.imprimirReportePorComparador(new ComparadorTiempo());
+                    break;
+                case 5:
+                    CD.imprimirReportePorTipoEstructura("ListaSimple");
+                default:
+                    System.out.println("Opcion no valida");
+            }
+        }while(opcion !=6);
+    }
+    public static void consultarPaquetes(CentroDistribucion CD){
+        int opcion;
+        do{
+            System.out.println("\n===== Consulta de paquetes =====");
+            System.out.println("1. Consultar paquete individual por codigo");
+            System.out.println("2. Consultar paquetes ordenados por destino");
+            System.out.println("3. Consultar paquete ordenados por orden de llegada");
+            System.out.println("4. Consultar paquete ordenados por orden de ID");
+            System.out.println("5. Consultar paquete ordenados por orden de despacho");
+            System.out.println("6. Volver al menu principal");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion){
+                case 1:
+                    System.out.println("Ingrese codigo del paquete a consultar: ");
+                    String codigo;
+                    codigo = sc.nextLine();
+                    System.out.println("\n" + CD.buscarPaquete(codigo));
+                    break;
+                case 2:
+                    CD.imprimirReportePorTipoEstructura("Destino");
+                    break;
+                case 3:
+                    CD.imprimirReportePorTipoEstructura("Auditoria");
+                    break;
+                case 4:
+                    CD.imprimirReportePorTipoEstructura("OrdenID");
+                    break;
+                case 5:
+                    CD.imprimirReportePorTipoEstructura("Despacho");
+                    break;
+                case 6:
+                    System.out.println("Volviendo al menu principal");
+                default:
+                    System.out.println("Opcion no valida");
+            }
+        }while(opcion !=6);
+    }
+    public static void menuAdministracion(CentroDistribucion CD){
+        int opcion;
+        do{
+            System.out.println("\n===== Administracion de paquetes =====");
+            System.out.println("1. Crear paquete");
+            System.out.println("2. Eliminar paquete");
+            System.out.println("3. Obtener siguiente paquete por despachar");
+            System.out.println("4. Volver al menu principal");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion){
+                case 1:
+                    crearPaquete(CD);
+                    break;
+                case 2:
+                    System.out.println("Ingrese codigo del paquete a eliminar: ");
+                    String codigo = sc.nextLine();
+                    CD.eliminarPaquete(codigo);
+                    break;
+                case 3:
+                    System.out.println("El siguiente paquete a despachar es: ");
+                    System.out.println(CD.despacharSiguienteUrgente());
+                    break;
+                case 4:
+                    System.out.println("Volviendo al menu principal");
+                default:
+                    System.out.println("Opcion no valida");
+            }
 
+        }while(opcion !=4);
+    }
+    public static void crearPaquete(CentroDistribucion CD) {
+        System.out.println("===== Creacion de paquete =====");
+
+        String codigo;
+        Destino destino = null;
+        double peso;
+        int prioridad;
+        int tiempo_estimado;
+        boolean valido;
+
+// Codigo
+        do {
+            System.out.println("Ingrese codigo del paquete (PQXXX): ");
+            codigo = sc.nextLine();
+
+            valido = !codigo.matches("PQ[0-9]{3}");
+
+            if (valido) {
+                System.out.println("El codigo debe tener el formato PQXXX");
+            } else if (CD.buscarPaquete(codigo) != null) {
+                System.out.println("El codigo ya existe");
+                valido = true;
+            }
+        } while (valido);
+
+// Destino
+        do {
+            System.out.println("Ingrese destino (Armenia, Salento, Circasia, Filandia, Montenegro): ");
+
+            try {
+                destino = Destino.getDestino(sc.nextLine());
+                valido = false;
+            } catch (Exception e) {
+                System.out.println("Destino no valido");
+                valido = true;
+            }
+        } while (valido);
+
+// Peso
+        while (true) {
+            System.out.println("Ingrese peso del paquete: ");
+
+            try {
+                peso = Double.parseDouble(sc.nextLine());
+
+                if (peso > 0) {
+                    break;
+                }
+
+                System.out.println("El peso debe ser mayor a 0");
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un peso numerico valido");
+            }
+        }
+
+// Prioridad (opcional)
+        while (true) {
+            System.out.println("Ingrese prioridad (1-5) o presione Enter para omitirla: ");
+            String entrada = sc.nextLine();
+
+            if (entrada.isBlank()) {
+                prioridad = 0;
+                break;
+            }
+
+            try {
+                prioridad = Integer.parseInt(entrada);
+
+                if (prioridad >= 1 && prioridad <= 5) {
+                    break;
+                }
+
+                System.out.println("La prioridad debe estar entre 1 y 5");
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un numero entero valido");
+            }
+        }
+
+// Tiempo estimado
+        while (true) {
+            System.out.println("Ingrese tiempo estimado del paquete: ");
+
+            try {
+                tiempo_estimado = Integer.parseInt(sc.nextLine());
+
+                if (tiempo_estimado > 0) {
+                    break;
+                }
+
+                System.out.println("El tiempo estimado debe ser mayor a 0");
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un numero entero valido");
+            }
+        }
+
+// Crear y registrar paquete
+        HashMap<String, Object> datos = new HashMap<>();
+        datos.put("Codigo", codigo);
+        datos.put("Destino", destino);
+        datos.put("Peso", peso);
+
+        if (prioridad != 0) {
+            datos.put("Prioridad", prioridad);
+        }
+
+        datos.put("Tiempo_estimado", tiempo_estimado);
+
+        CD.registrarPaquete(new Paquete(datos));
+
+        System.out.println("Paquete registrado correctamente.");
+    }
 }
 
 

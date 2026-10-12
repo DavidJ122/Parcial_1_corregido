@@ -61,13 +61,13 @@ public class Paquete implements Comparable<Paquete>{
         Random entero=new Random();
         int random = entero.nextInt(999);
         if (random < 10){
-            return "PD000" + random;
+            return "PQ00" + random;
         }
         if (random < 100){
-            return "PD00" + random;
+            return "PQ0" + random;
         }
 
-        return "PD" + entero.nextInt(9999);
+        return "PQ" + entero.nextInt(999);
     }
     //Asigna el destino al paquete
     //En caso de que el destino sea nulo, se lanza una excepcion
@@ -120,19 +120,24 @@ public class Paquete implements Comparable<Paquete>{
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Codigo: ").append(this.getCodigo()).append("\n");
-        sb.append("Destino: ").append(this.getDestino()).append("\n");
-        sb.append("Peso: ").append(this.getPeso()).append("\n");
-        sb.append("Prioridad: ").append(this.getPrioridad()).append("\n");
-        sb.append("Tiempo_estimado: ").append(this.getTiempo_estimado()).append("\n");
+        sb.append("Codigo: ").append(this.getCodigo()).append("|");
+        sb.append("Destino: ").append(this.getDestino()).append("|");
+        sb.append("Peso: ").append(this.getPeso()).append(" kg").append("|");
+        sb.append("Prioridad: ").append(this.getPrioridad()).append("|");
+        sb.append("Tiempo_estimado: ").append(this.getTiempo_estimado()).append("|");
         sb.append("----------------------------------------\n");
-        sb.append("\n");
         return sb.toString();
     }
-    //Compara dos paquetes por el PID sin el prefijo "PD"
+    //Compara dos paquetes por el codigo"
     @Override
     public int compareTo(Paquete o) {
-        return o.compareTo(this);
+        return this.getCodigo().compareTo(o.getCodigo());
+    }
+
+    //Compara dos paquetes por su hashcode
+    @Override
+    public boolean equals(Object o) {
+        return o.hashCode() == this.hashCode();
     }
 
 

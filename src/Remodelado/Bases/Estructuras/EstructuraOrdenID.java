@@ -1,5 +1,6 @@
 package Remodelado.Bases.Estructuras;
 
+import Remodelado.Bases.Recursivos.BusquedaCodigo;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.Collection;
@@ -38,12 +39,7 @@ public class EstructuraOrdenID implements IEstructura<TreeSet<Paquete>,String> {
     //Devuelve el paquete con el ID dado.
     @Override
     public Paquete getPaquete(String Codigo) {
-        for (Paquete p : this.paquetes) {
-            if (p.getCodigo().equals(Codigo)) {
-                return p;
-            }
-        }
-        return null;
+        return new BusquedaCodigo(this.getPaquetes()).Buscar(Codigo);
     }
     //Devuelve el tamaño del TreeSet.
     @Override
@@ -64,7 +60,10 @@ public class EstructuraOrdenID implements IEstructura<TreeSet<Paquete>,String> {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        int I = 0;
         for (Paquete p : this.paquetes) {
+            I = I+1;
+            sb.append(I).append(".-: ");
             sb.append(p.toString()).append("\n");
         }
         return sb.toString();

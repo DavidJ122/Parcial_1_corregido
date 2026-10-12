@@ -76,7 +76,7 @@ public class Nodo<T>{
     //Compara el dato del nodo con el dato dado.
     //Si son iguales devuelve true, de lo contrario devuelve false.
     public boolean equal(T dato_nuevo){
-        return dato.toString().equals(dato_nuevo.toString());
+        return dato.equals(dato_nuevo);
     }
     //Metodo complementario de lista.
     //Si no es el final de la lista:
@@ -107,7 +107,11 @@ public class Nodo<T>{
     //Devuelve una cadena con el dato del nodo y el siguiente nodo.
     @Override
     public String toString(){
-        if (this.next == null){return this.dato.toString();}
-        return this.dato.toString() + " -> "+ this.next.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.dato.toString());
+        sb.append(" -> ");
+        if (this.next == null){sb.append("null.");}
+        else {sb.append(this.next.toString());}
+        return sb.toString();
     }
 }

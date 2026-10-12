@@ -4,6 +4,9 @@ import Remodelado.Bases.modelo.Paquete;
 import Remodelado.Bases.Comparadores.*;
 import Remodelado.ListCustom.List;
 
+import java.util.Comparator;
+import java.util.Scanner;
+
 /**
  * Clase principal que actúa como Fachada (Facade).
  * Coordina las estructuras de datos propias sin acoplar la lógica de negocio.
@@ -55,6 +58,45 @@ public class CentroDistribucion {
     }
 
     /**
+     * ELIMINACION COORDINADA: Un paquete sale del sistema y se elimina de las estructuras
+     */
+    public void eliminarPaquete(String codigoId) {
+        Paquete paqueteEliminado = buscarPaquete(codigoId);
+        try{
+            this.historialLlegada.removePaquete(paqueteEliminado);
+        }catch(Exception e){
+            System.out.println("[Warning] El paquete no existe en el historial de llegada");
+        }
+        try{
+            this.registroPorId.removePaquete(paqueteEliminado);
+        }catch (Exception e){
+            System.out.println("[Warning] El paquete no existe en el registro organizado por ID");
+        }
+        try{
+            this.paquetesPorDestino.removePaquete(paqueteEliminado);
+
+        }catch (Exception e){
+            System.out.println("[Warning] El paquete no existe en el registro por destino");
+        }
+        try{
+            this.colaDespacho.removePaquete(paqueteEliminado);
+        }
+        catch (Exception e){
+            System.out.println("[Warning] El paquete no existe en la cola de prioridad");
+        }
+        try{
+            this.colaEntregasNormales.removePaquete(paqueteEliminado);
+        }catch(Exception e){
+            System.out.println("[Warning] El paquete no existe en las estructuras auxiliares");
+        }
+        try{
+            this.historialLlegada.removePaquete(paqueteEliminado);
+        }
+        catch (Exception e){
+            System.out.println("[Warning] El paquete no existe en el historial de llegada");
+        }
+    }
+    /**
      * DESPACHO PRIORITARIO: Extrae el paquete más urgente según ComparadorDespacho
      */
     public Paquete despacharSiguienteUrgente() {
@@ -62,6 +104,7 @@ public class CentroDistribucion {
             return null;
         }
         this.historialPaquetes.add(colaDespacho.getPaquetes().peek());
+        this.registroPorId.removePaquete(colaDespacho.getPaquetes().peek());
         return colaDespacho.getFirst(); // Internamente usa O(log n)
     }
 
@@ -79,25 +122,63 @@ public class CentroDistribucion {
     /**
      * Ejemplo utilizando las clases comparadoras independientes que crearon
      */
-    public void imprimirReportePorPeso() {
-        // Asumiendo que historialLlegada puede retornar una lista para ordenar
-        // o que tu estructura tiene un método de ordenamiento.
-        System.out.println("--- Reporte por Peso (Descendente) ---");
-        EstructuraPrioritaria orden_peso = new EstructuraPrioritaria(new ComparadorPeso());
+    public void imprimirReportePorComparador(Comparator<Paquete> comparador) {
+        if (comparador == null) {
+            throw new IllegalArgumentException("El comparador no puede ser nulo");
+        }
+        Scanner sc = new Scanner(System.in);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Reporte por ");
+        switch (comparador.getClass().getSimpleName()) {
+            case "ComparadorPrioritario":
+                sb.append("Prioridad (Descendente) ---");
+                break;
+            case "ComparadorTiempo":
+                sb.append("Tiempo Estimado (Ascendente) ---");
+                break;
+            case "ComparadorPeso":
+                sb.append("Peso (Descendente) ---");
+                break;
+            case "ComparadorDespacho":
+                sb.append("Despacho (Prioridad>Tiempo>Codigo) ---"); break;
+                default: sb.append("sin especificar ---"); break;
+        }
+        System.out.println(sb);
+        EstructuraPrioritaria orden_comparator = new EstructuraPrioritaria(comparador);
         // Lógica de impresión usando ComparadorPeso
-        orden_peso.copyAll(historialLlegada.getPaquetes());
-        System.out.println(orden_peso);
+        orden_comparator.copyAll(historialLlegada.getPaquetes());
+        System.out.println(orden_comparator);
+        System.out.println("Presione Enter para continuar...");
+        sc.nextLine();
     }
 
     /**
-     * Ejemplo utilizando el enfoque Híbrido (Java 17) para impresionar al profesor
+     * Ejemplo mostrando el orden de las distintas estructuras
      */
-    public void imprimirReportePorTiempoEstimado() {
-        System.out.println("--- Reporte por Tiempo Estimado (Ascendente) ---");
-        EstructuraPrioritaria orden_tiempo = new EstructuraPrioritaria(new ComparadorTiempo());
-        orden_tiempo.copyAll(historialLlegada.getPaquetes());
-        System.out.println(orden_tiempo);
-        // Si tuvieras que ordenar una lista nativa en este punto, usarías:
-        // lista.sort(Comparator.comparingInt(Paquete::getTiempoEstimado));
+    public void imprimirReportePorTipoEstructura(String tipoEstructura) {
+        System.out.println("--- Reporte por " + tipoEstructura + " ---");
+        Scanner sc = new Scanner(System.in);
+        switch (tipoEstructura) {
+            case "Auditoria":
+                System.out.println(historialLlegada);
+                break;
+            case "Destino":
+                System.out.println(paquetesPorDestino);
+                break;
+            case "OrdenID":
+                System.out.println(registroPorId);
+                break;
+            case "Despacho":
+                System.out.println(colaDespacho);
+                break;
+            case "ListaSimple":
+                System.out.println(historialPaquetes);
+                break;
+        }
+        System.out.println("Presione Enter para continuar...");
+        sc.nextLine();
     }
+
+
 }

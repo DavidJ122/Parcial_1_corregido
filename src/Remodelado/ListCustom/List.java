@@ -57,7 +57,11 @@ public class List<T> implements Iterable<T>{
     //Devuelve una cadena con todos los datos de la lista.
     @Override
     public String toString(){
-        return this.header.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Lista: ");
+        if (this.isEmpty()){sb.append("Vacia.");}
+        else{sb.append(this.header.toString());}
+        return sb.toString();
     }
 
     //Iterador de la lista.

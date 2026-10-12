@@ -31,7 +31,7 @@ public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>
     //Agrega un paquete al PriorityQueue.
     @Override
     public void addPaquete(Paquete paquete){
-        this.paquetes.add(paquete);
+        this.paquetes.offer(paquete);
     }
     //Elimina un paquete del PriorityQueue.
     @Override
@@ -41,12 +41,10 @@ public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>
     //Devuelve el paquete con el ID dado.
     @Override
     public Paquete getPaquete(String Codigo){
-        for (Paquete p : this.paquetes) {
-            if (Objects.equals(p.getCodigo(), Codigo)) {
-                return p;
-            }
-        }
-        return null;
+        return this.getfirst();
+    }
+    private Paquete getfirst(){
+        return this.paquetes.poll();
     }
     //Obtiene el tamaño del PriorityQueue.
     @Override
@@ -71,7 +69,10 @@ public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        int I = 0;
         while (!this.isEmpty()) {
+            I = I+1;
+            sb.append(I).append(".-: ");
             sb.append(paquetes.poll());
             sb.append("\n");
         }

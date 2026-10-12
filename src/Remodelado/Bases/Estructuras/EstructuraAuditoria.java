@@ -63,6 +63,7 @@ public class EstructuraAuditoria implements IEstructura<LinkedList<Paquete>,Stri
         StringBuilder sb = new StringBuilder();
         for (Paquete p : this.paquetes) {
             sb.append(p.toString());
+            sb.append("↓");
         }
         return sb.toString();
     }

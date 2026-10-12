@@ -58,7 +58,10 @@ public class EstructuraFIFO implements IEstructura<ArrayDeque<Paquete>,String> {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        int I = 0;
         for (Paquete p : this.paquetes) {
+            I = I+1;
+            sb.append(I).append(".-: ");
             sb.append(p.toString());
         }
         return sb.toString();

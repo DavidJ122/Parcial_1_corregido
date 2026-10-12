@@ -103,7 +103,7 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
     public String toString(){
         StringBuilder sb = new StringBuilder();
         for (Destino d : this.paquetes.keySet()) {
-            sb.append(d.toString());
+            sb.append("==========").append(d.toString()).append("==========");
             sb.append("\n");
             for (Paquete p : this.paquetes.get(d)) {
                 sb.append(p.toString());

@@ -20,7 +20,7 @@ public class FiltroPrioridad{
         }
         return this.filtrar(dato,priminima,i+1);
     }
-    //metodo condicional que filtra los paquetes para una mejor legibilidad
+    //Metodo condicional que filtra los paquetes para una mejor legibilidad
     private boolean filtro(Paquete p, int priminima){
         if (p.getPrioridad() >= priminima){
             return true;
