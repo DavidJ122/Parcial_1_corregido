@@ -12,47 +12,7 @@ import java.util.HashMap;
 //Main
 public class Main {
     public static void main(String[] args) {
-        EstructuraOrdenID estructuraPrincipal = new EstructuraOrdenID();
-        EstructuraLlegada estructuraLlegada = new EstructuraLlegada();
-        Boolean flag = true;
-        while (flag) {
-            try {
-                generarPaquetes(estructuraPrincipal, estructuraLlegada);
-                flag = false;
-            } catch (Exception e) {
-                System.out.println("Error al generar los paquetes, reintentando");
-                estructuraLlegada = new EstructuraLlegada();
-                estructuraPrincipal = new EstructuraOrdenID();
-            }
-        }
 
-
-       // printID(estructuraPrincipal);
-       // printLL(estructuraLlegada);
-        //EstructuraDestino estructuraDestino = new EstructuraDestino();
-        //printD(estructuraDestino,estructuraLlegada);
-        //EstructuraFIFO estructuraFIFO = new EstructuraFIFO();
-        //printFIFO(estructuraFIFO,estructuraLlegada);
-        //EstructuraPrioritaria estructuraPrioritaria = null;
-        //printPri(estructuraPrioritaria,estructuraLlegada);
-        //List<Paquete> listaPaquetes = new List<>();
-        //listaPaquetes.add(estructuraFIFO.getFirst());
-        //listaPaquetes.add(estructuraFIFO.getFirst());
-        //listaPaquetes.add(estructuraFIFO.getFirst());
-        //listaPaquetes.add(estructuraFIFO.getFirst());
-        //listaPaquetes.add(estructuraFIFO.getFirst());
-        //System.out.println("Lista generica simplemente enlazada: ");
-        //System.out.println(listaPaquetes);
-        //System.out.println("Longitud de la lista: ");
-        //System.out.println(listaPaquetes.lenght());
-        //System.out.println("Quinto elemento de la lista: ");
-        //System.out.println(listaPaquetes.getSlot(3));
-        Paquete paquete_codigo = new BusquedaCodigo().Buscar(estructuraPrincipal.getPaquetes(), "PD003");
-        Paquete paquete_codigo2 = new BusquedaCodigo().Buscar(estructuraPrincipal.getPaquetes(), "PD000");
-        Paquete paquete_codigo3 = new BusquedaCodigo().Buscar(estructuraPrincipal.getPaquetes(), "PD014");
-        System.out.println("Paquete 1 con codigo: " + paquete_codigo.getCodigo());
-        System.out.println("Paquete 2 con codigo: " + paquete_codigo2.getCodigo());
-        System.out.println("Paquete 3 con codigo: " + paquete_codigo3.getCodigo());
 
 
 
@@ -341,53 +301,6 @@ public class Main {
         estructuraLlegada.addPaquete(paquete30);
     }
 
-    public static void printID(EstructuraOrdenID estructuraOrdenID) {
-        System.out.println("Estructura de paquete organizada por ID");
-        System.out.println(estructuraOrdenID);
-        System.out.println("----------------------------------------");
-    }
-    public static void printLL(EstructuraLlegada estructuraLlegada) {
-        System.out.println("Estructura de paquete organizada por llegada");
-        System.out.println(estructuraLlegada);
-        System.out.println("----------------------------------------");
-    }
-    public static void printD(EstructuraDestino estructuraDestino,EstructuraLlegada estructuraLlegada) {
-
-        estructuraDestino.copyAll(estructuraLlegada.getPaquetes());
-        System.out.println("Estructura de paquete organizada por destino");
-        System.out.println(estructuraDestino);
-        System.out.println("----------------------------------------");
-    }
-    public static void printFIFO(EstructuraFIFO estructuraFIFO, EstructuraLlegada estructuraLlegada) {
-        estructuraFIFO.copyAll(estructuraLlegada.getPaquetes());
-        System.out.println("Estructura de paquete organizada por FIFO");
-        System.out.println(estructuraFIFO);
-        System.out.println("Primero de la lista:");
-        System.out.println(estructuraFIFO.getFirst());
-        System.out.println("Estructura luego de sacar el primero");
-        System.out.println(estructuraFIFO);
-    }
-    public static void printPri(EstructuraPrioritaria estructuraPrioritaria, EstructuraLlegada estructuraLlegada) {
-        estructuraPrioritaria = new EstructuraPrioritaria(new ComparadorDespacho());
-        estructuraPrioritaria.copyAll(estructuraLlegada.getPaquetes());
-        System.out.println("Estructura de paquete organizada por despacho prioritario");
-        System.out.println(estructuraPrioritaria);
-        System.out.println("--------------------------------------------------");
-        estructuraPrioritaria = new EstructuraPrioritaria(new ComparadorTiempo());
-        estructuraPrioritaria.copyAll(estructuraLlegada.getPaquetes());
-        System.out.println("Estructura de paquete organizada por tiempo");
-        System.out.println(estructuraPrioritaria);
-        System.out.println("--------------------------------------------------");
-        estructuraPrioritaria = new EstructuraPrioritaria(new ComparadorPeso());
-        estructuraPrioritaria.copyAll(estructuraLlegada.getPaquetes());
-        System.out.println("Estructura de paquete organizada por peso");
-        System.out.println(estructuraPrioritaria);
-        System.out.println("-----------------------------------------------");
-        estructuraPrioritaria = new EstructuraPrioritaria(new ComparadorPrioritario());
-        estructuraPrioritaria.copyAll(estructuraLlegada.getPaquetes());
-        System.out.println("Estructura de paquete organizada por prioridad");
-        System.out.println(estructuraPrioritaria);
-    }
 }
 
 

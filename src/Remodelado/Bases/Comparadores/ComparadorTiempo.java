@@ -3,7 +3,7 @@ package Remodelado.Bases.Comparadores;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.Comparator;
-
+//Compara de acuerdo al tiempo estimado.
 public class ComparadorTiempo implements Comparator<Paquete> {
 
     @Override

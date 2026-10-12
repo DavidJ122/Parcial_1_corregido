@@ -6,7 +6,10 @@ import Remodelado.Enum.Destino;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-
+//Estructura especializada para los paquetes con destino.
+/* Esta diseñada con el proposito de utilizar un hashmap de tal manera
+que el destino sea la clave y el valor sea una lista de paquetes asignadas al destino.
+ */
 public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList<Paquete>>,HashMap<String, Object>> {
     HashMap<Destino, ArrayList<Paquete>> paquetes;
     public EstructuraDestino(){
@@ -14,10 +17,13 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
     }
 
     @Override
+    //Devuelve el hashmap de paquetes.
     public HashMap<Destino, ArrayList<Paquete>> getPaquetes() {
         return this.paquetes;
     }
-
+    //Agrega un paquete al hashmap, tomando el destino del paquete como clave.
+    //En caso de que el destino ya exista, se agrega el paquete a la lista de paquetes del destino.
+    //En caso de que el destino no exista, se crea un nuevo destino con el paquete como valor.
     @Override
     public void addPaquete(Paquete paquete) {
         Destino destino = paquete.getDestino();
@@ -31,7 +37,8 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
             this.paquetes.put(destino, paquetes);
         }
     }
-
+    //Elimina un paquete del hashmap, tomando el destino del paquete como clave.
+    //En caso de que el destino se quede sin paquetes, se elimina el destino del hashmap.
     @Override
     public void removePaquete(Paquete paquete) {
         ArrayList<Paquete> paquetes = this.paquetes.get(paquete.getDestino());
@@ -41,7 +48,11 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
         }
     }
 
-
+    //Devuelve el paquete con el ID dado, tomando el destino del paquete como clave.
+    //Se ingresa un hashmap con el destino y el ID del paquete.
+    //Con claves "Destino" y "ID" cono valor.
+    //Se desempaqueta el hashmap para obtener el destino y obtener el valor.
+    //Y luego se busca el paquete con el ID dado.
     @Override
     public Paquete getPaquete(HashMap<String,Object> ID) {
         Destino destino = (Destino) ID.get("Destino");
@@ -54,17 +65,18 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
         return null;
 
     }
-
+    //Obtener el tamaño del hashmap.
     @Override
     public int getSize() {
         return this.paquetes.size();
     }
-
+    //Retorna verdadero o falso en caso de que el hashmap este vacio.
     @Override
     public boolean isEmpty() {
         return this.paquetes.isEmpty();
     }
-
+    //Copia todos los paquetes de una coleccion generica en el hashmap.
+    //Es util para cuando se crea un nueva copia de la estructura.
     @Override
     public void copyAll(Collection<Paquete> paquetes) {
         for (Paquete p : paquetes) {
@@ -79,6 +91,7 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
             }
         }
     }
+    //Retorna una cadena con todos los paquetes del hashmap.
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();

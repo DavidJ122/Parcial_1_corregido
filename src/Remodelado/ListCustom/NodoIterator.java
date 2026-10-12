@@ -1,7 +1,8 @@
 package Remodelado.ListCustom;
 
 import java.util.Iterator;
-
+//Iterator para el nodo
+//Implementa metodos para iterar sobre la lista.
 public class NodoIterator<T>  implements Iterator<T> {
     private Nodo<T> current;
 

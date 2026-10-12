@@ -3,7 +3,7 @@ package Remodelado.Bases.Comparadores;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.Comparator;
-
+//Compara de acuerdo a la prioridad.
 public class ComparadorPrioritario implements Comparator<Paquete> {
     @Override
     public int compare(Paquete o1, Paquete o2) {
