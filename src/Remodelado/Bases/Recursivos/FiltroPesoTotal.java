@@ -3,16 +3,35 @@ package Remodelado.Bases.Recursivos;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.ArrayList;
+import java.util.Collection;
+
 //Filtro que calcula el peso total de los paquetes.
 //Se utilizan metodos recursivos
-public class FiltroPesoTotal{
+public class FiltroPesoTotal {
+    ArrayList<Paquete> dato;
 
-    public Double filtrar(ArrayList<Paquete> dato, int i) {
-        //Caso Base
-        if (i == dato.size() - 1){ return dato.get(i).getPeso();}
-        //Caso Recursivo cuando se empieza
-        if (i == 0){ return dato.getFirst().getPeso() + this.filtrar(dato,i+1);}
-        //Caso recursivo
-        return this.filtrar(dato,i) + this.filtrar(dato,i+1);
+    public FiltroPesoTotal(Collection<Paquete> paquetes) {
+        this.dato = new ArrayList<>(paquetes);
+    }
+
+    // Metodo publico
+    public Double filtrar() {
+        return filtrar(0);
+    }
+
+    // Metodo recursivo auxiliar
+    private Double filtrar(int i) {
+        // Caso base: lista vacia
+        if (dato.isEmpty()) {
+            return 0.0;
+        }
+
+        // Caso base: ultimo elemento
+        if (i == dato.size() - 1) {
+            return dato.get(i).getPeso();
+        }
+
+        // Caso recursivo
+        return dato.get(i).getPeso() + filtrar(i + 1);
     }
 }

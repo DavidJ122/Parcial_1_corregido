@@ -1,7 +1,11 @@
 package Remodelado.Bases.Estructuras;
 
+import Remodelado.Bases.Recursivos.FiltroPesoMajor;
+import Remodelado.Bases.Recursivos.FiltroPesoTotal;
+import Remodelado.Bases.Recursivos.FiltroPrioridad;
 import Remodelado.Bases.modelo.Paquete;
 import Remodelado.Bases.Comparadores.*;
+import Remodelado.Enum.Destino;
 import Remodelado.ListCustom.List;
 
 import java.util.Comparator;
@@ -179,6 +183,34 @@ public class CentroDistribucion {
         System.out.println("Presione Enter para continuar...");
         sc.nextLine();
     }
+    /**
+     *
+     */
+    public void imprimirReportesEspecialesPesoMayor(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("--- Reporte Especial ---");
+        System.out.println("El mayor peso del conjunto de paquetes es:");
+        System.out.println(new FiltroPesoMajor(this.historialLlegada.getPaquetes()).buscar());
+        System.out.println("Presione Enter para continuar...");
+        sc.nextLine();
+    }
+    public void imprimirReportesEspecialesPesoTotal(Destino destino){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("--- Reporte Especial ---");
+        System.out.println("El total de peso de los paquetes del destino " + destino + " es:");
+        Destino destino_filtro = Destino.getDestino(destino.toString());
+        System.out.println(new FiltroPesoTotal(this.paquetesPorDestino.getPaquetes().get(destino_filtro)).filtrar());
+        System.out.println("Presione Enter para continuar...");
+        sc.nextLine();
+    }
 
+    public void imprimirReportesEspecialesPrioridadMinima(int prioridad){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("--- Reporte Especial ---");
+        System.out.println("La cantidad de paquetes con prioridad " + prioridad + " o mayor son:");
+        System.out.println(new FiltroPrioridad(this.historialLlegada.getPaquetes()).filtrar(prioridad));
+        System.out.println("Presione Enter para continuar...");
+        sc.nextLine();
+    }
 
 }

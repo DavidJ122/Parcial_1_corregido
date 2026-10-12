@@ -16,13 +16,6 @@ public class Main {
         final CentroDistribucion quindioExpress = new CentroDistribucion();
         generarPaquetes(quindioExpress);
         menuPrincipal(quindioExpress);
-        //quindioExpress.imprimirReportePorTipoEstructura("Auditoria");
-        //quindioExpress.imprimirReportePorTipoEstructura("Destino");
-        //quindioExpress.imprimirReportePorTipoEstructura("OrdenID");
-        //quindioExpress.imprimirReportePorTipoEstructura("Despacho");
-        //quindioExpress.imprimirReportePorTipoEstructura("ListaSimple");
-
-
 
     }
     public static void generarPaquetes(CentroDistribucion CD){
@@ -329,7 +322,8 @@ public class Main {
             System.out.println("1. Administracion de paquetes");
             System.out.println("2. Consultar paquetes");
             System.out.println("3. Imprimir reporte");
-            System.out.println("4. Salir");
+            System.out.println("4. Reportes especiales");
+            System.out.println("5. Salir");
             opcion = sc.nextInt();
             sc.nextLine();
             switch (opcion) {
@@ -343,9 +337,12 @@ public class Main {
                     imprimirReporte(CD);
                     break;
                 case 4:
+                    reportesEspeciales(CD);
+                case 5:
                     System.out.println("Saliendo...");
+                    break;
             }
-        } while (opcion !=4);
+        } while (opcion !=5);
         sc.close();
     }
     public static void imprimirReporte(CentroDistribucion CD){
@@ -559,6 +556,59 @@ public class Main {
         CD.registrarPaquete(new Paquete(datos));
 
         System.out.println("Paquete registrado correctamente.");
+    }
+    public static void reportesEspeciales(CentroDistribucion CD){
+        int opcion;
+        do{
+            System.out.println("\n===== Reporte especial de paquetes =====");
+            System.out.println("1. Reporte especial: El mayor peso de paquetes");
+            System.out.println("2. Reporte especial: El peso total por destino");
+            System.out.println("3. Reporte especial: Paquetes por prioridad minima");
+            System.out.println("4. Volver al menu principal");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion){
+                case 1:
+                    CD.imprimirReportesEspecialesPesoMayor();
+                    break;
+                case 2:
+                    Destino destino = null;
+                    boolean valido;
+                    do {
+                        System.out.println("Ingrese destino (Armenia, Salento, Circasia, Filandia, Montenegro): ");
+                        try {
+                            destino = Destino.getDestino(sc.nextLine());
+                            valido = false;
+                        } catch (Exception e) {
+                            System.out.println("Destino no valido");
+                            valido = true;
+                        }
+                    } while (valido);
+                    CD.imprimirReportesEspecialesPesoTotal(destino);
+                case 3:
+                    int prioridad;
+                    while (true) {
+                        System.out.println("Ingrese prioridad (1-5): ");
+                        String entrada = sc.nextLine();
+                        try {
+                            prioridad = Integer.parseInt(entrada);
+
+                            if (prioridad >= 1 && prioridad <= 5) {
+                                break;
+                            }
+
+                            System.out.println("La prioridad debe estar entre 1 y 5");
+                        } catch (NumberFormatException e) {
+                            System.out.println("Ingrese un numero entero valido");
+                        }
+                    }
+                    CD.imprimirReportesEspecialesPrioridadMinima(prioridad);
+                case 4:
+                    System.out.println("Volver al menu principal");
+                default:
+                    System.out.println("Opcion no valida");
+            }
+        }while(opcion !=4);
     }
 }
 

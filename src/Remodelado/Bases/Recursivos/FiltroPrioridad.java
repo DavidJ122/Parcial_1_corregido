@@ -1,30 +1,42 @@
 package Remodelado.Bases.Recursivos;
 
 import Remodelado.Bases.modelo.Paquete;
-
 import java.util.ArrayList;
-//Filtro que obtiene los paquetes con prioridad mayor o igual a la minima.
-public class FiltroPrioridad{
+import java.util.Collection;
 
-    public Integer filtrar(ArrayList<Paquete> dato, int priminima,int i) {
-        //Caso Base
-        if (i == dato.size() - 1) {
-            if (this.filtro(dato.get(i),priminima)){
-                return 1 + this.filtrar(dato,priminima,i+1);
-            }
+// Filtro que cuenta los paquetes con prioridad mayor o igual a la minima.
+public class FiltroPrioridad {
+
+    private ArrayList<Paquete> dato;
+
+    public FiltroPrioridad(Collection<Paquete> paquetes) {
+        this.dato = new ArrayList<Paquete>(paquetes);
+    }
+
+    // Metodo publico
+    public Integer filtrar(int priminima) {
+        if (dato.isEmpty()) {
             return 0;
         }
-        //Caso Recursivo
-        if (this.filtro(dato.get(i),priminima)){
-            return 1 + this.filtrar(dato,priminima,i+1);
-        }
-        return this.filtrar(dato,priminima,i+1);
+
+        return filtrar(priminima, 0);
     }
-    //Metodo condicional que filtra los paquetes para una mejor legibilidad
-    private boolean filtro(Paquete p, int priminima){
-        if (p.getPrioridad() >= priminima){
-            return true;
+
+    // Metodo recursivo auxiliar
+    private Integer filtrar(int priminima, int i) {
+        // Caso base: ultimo elemento
+        if (i == dato.size() - 1) {
+            return filtro(dato.get(i), priminima) ? 1 : 0;
         }
-        return false;
+
+        // Caso recursivo
+        int cantidad = filtro(dato.get(i), priminima) ? 1 : 0;
+
+        return cantidad + filtrar(priminima, i + 1);
+    }
+
+    // Metodo condicional
+    private boolean filtro(Paquete p, int priminima) {
+        return p.getPrioridad() >= priminima;
     }
 }
