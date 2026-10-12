@@ -4,10 +4,10 @@ import Remodelado.Bases.Paquete;
 
 import java.util.Comparator;
 
-public class CompadorPID implements Comparator<Paquete> {
+public class ComparadorTiempo implements Comparator<Paquete> {
 
     @Override
     public int compare(Paquete o1, Paquete o2) {
-        return Integer.compare(o1.getPID_Raw(), o2.getPID_Raw());
+        return Integer.compare(o1.getTiempo_estimado(), o2.getTiempo_estimado());
     }
 }

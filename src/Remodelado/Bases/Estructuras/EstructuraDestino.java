@@ -66,7 +66,7 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
     }
 
     @Override
-    public void addAll(Collection<Paquete> paquetes) {
+    public void copyAll(Collection<Paquete> paquetes) {
         for (Paquete p : paquetes) {
             if (this.paquetes.containsKey(p.getDestino())){
                 ArrayList<Paquete> paquetesDestino = this.paquetes.get(p.getDestino());
@@ -78,5 +78,17 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
                 this.paquetes.put(p.getDestino(), paquetesDestino);
             }
         }
+    }
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Destino d : this.paquetes.keySet()) {
+            sb.append(d.toString());
+            sb.append("\n");
+            for (Paquete p : this.paquetes.get(d)) {
+                sb.append(p.toString());
+            }
+        }
+        return sb.toString();
     }
 }

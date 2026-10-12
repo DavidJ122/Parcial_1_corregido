@@ -3,16 +3,13 @@ package Remodelado.Bases.Estructuras;
 import Remodelado.Bases.Comparadores.ComparadorDespacho;
 import Remodelado.Bases.Paquete;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>,String> {
     PriorityQueue<Paquete> paquetes;
 
-    public EstructuraPrioritaria(){
-        this.paquetes = new PriorityQueue<>(new ComparadorDespacho());
+    public EstructuraPrioritaria(Comparator<Paquete> comparador){
+        this.paquetes = new PriorityQueue<>(comparador);
     }
     @Override
     public PriorityQueue<Paquete> getPaquetes() {
@@ -53,15 +50,26 @@ public class EstructuraPrioritaria implements IEstructura<PriorityQueue<Paquete>
     }
 
     @Override
-    public void addAll(Collection<Paquete> paquetes) {
+    public void copyAll(Collection<Paquete> paquetes) {
         this.paquetes.addAll(paquetes);
     }
-
+    public Paquete getFirst(){
+        return this.paquetes.poll();
+    }
     private void replace(ArrayList<Paquete> paquetes){
         this.clear();
         this.paquetes.addAll(paquetes);
     }
     private void clear(){
         this.paquetes.clear();
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        while (!this.isEmpty()) {
+            sb.append(paquetes.poll());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

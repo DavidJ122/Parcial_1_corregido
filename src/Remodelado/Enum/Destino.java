@@ -1,5 +1,5 @@
 package Remodelado.Enum;
 //Destino
 public enum Destino {
-    Armenia,Pereira
+    Armenia,Pereira,Circacia, El_valle
 }

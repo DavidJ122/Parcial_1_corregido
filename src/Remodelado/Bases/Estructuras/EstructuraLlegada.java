@@ -4,22 +4,21 @@ import Remodelado.Bases.Paquete;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
-public class EstructuraLlegada implements IEstructura<ArrayList<Paquete>,String> {
-    private ArrayList<Paquete> paquetes;
-
+public class EstructuraLlegada implements IEstructura<LinkedList<Paquete>,String>{
+    LinkedList<Paquete> paquetes;
     public EstructuraLlegada(){
-        this.paquetes = new ArrayList<>();
+        this.paquetes = new LinkedList<>();
     }
-
     @Override
-    public ArrayList<Paquete> getPaquetes() {
+    public LinkedList<Paquete> getPaquetes() {
         return this.paquetes;
     }
 
     @Override
     public void addPaquete(Paquete paquete) {
-        this.paquetes.add(paquete);
+            this.paquetes.add(paquete);
     }
 
     @Override
@@ -28,9 +27,9 @@ public class EstructuraLlegada implements IEstructura<ArrayList<Paquete>,String>
     }
 
     @Override
-    public Paquete getPaquete(String Codigo) {
+    public Paquete getPaquete(String ID) {
         for (Paquete p : this.paquetes) {
-            if (p.getCodigo().equals(Codigo)) {
+            if (p.getCodigo().equals(ID)){
                 return p;
             }
         }
@@ -39,16 +38,24 @@ public class EstructuraLlegada implements IEstructura<ArrayList<Paquete>,String>
 
     @Override
     public int getSize() {
-        return this.paquetes.size();
+        return paquetes.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return this.paquetes.isEmpty();
+        return paquetes.isEmpty();
     }
 
     @Override
-    public void addAll(Collection<Paquete> paquetes) {
+    public void copyAll(Collection<Paquete> paquetes) {
         this.paquetes.addAll(paquetes);
+    }
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Paquete p : this.paquetes) {
+            sb.append(p.toString());
+        }
+        return sb.toString();
     }
 }

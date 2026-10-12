@@ -3,6 +3,7 @@ package Remodelado.Bases.Estructuras;
 import Remodelado.Bases.Paquete;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class EstructuraFIFO implements IEstructura<ArrayDeque<Paquete>,String> {
@@ -46,7 +47,15 @@ public class EstructuraFIFO implements IEstructura<ArrayDeque<Paquete>,String> {
     }
 
     @Override
-    public void addAll(Collection<Paquete> paquetes) {
+    public void copyAll(Collection<Paquete> paquetes) {
         this.paquetes.addAll(paquetes);
+    }
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Paquete p : this.paquetes) {
+            sb.append(p.toString());
+        }
+        return sb.toString();
     }
 }

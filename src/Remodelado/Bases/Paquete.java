@@ -11,8 +11,14 @@ public class Paquete implements Comparable<Paquete>{
     private int Prioridad;
     private int Tiempo_estimado;
 
-
-    Paquete(HashMap<String,Object> datos){
+    //Constructor: Necesita un hashmap con los datos del paquete
+    // Codigo: El PID del paquete (Opcional)
+    // Destino: El destino del paquete
+    // Peso: El peso del paquete
+    // Prioridad: La prioridad del paquete (Opcional)
+    // Tiempo_estimado: El tiempo estimado de entrega del paquete
+    // Las llaves del hashmap deben ser: "Codigo", "Destino", "Peso", "Prioridad", "Tiempo_estimado"
+    public Paquete(HashMap<String, Object> datos){
         if (datos.isEmpty()  || !datos.containsKey("Destino") || !datos.containsKey("Peso")  || !datos.containsKey("Tiempo_estimado") )
         { throw new IllegalArgumentException("Faltaron uno o mas datos");}
 
@@ -24,12 +30,13 @@ public class Paquete implements Comparable<Paquete>{
 
         setDestino((Destino) datos.get("Destino"));
 
-        setPeso((float) datos.get("Peso"));
+        int peso = (int) datos.get("Peso");
+        setPeso(Float.parseFloat(peso+".0"));
 
         if (datos.containsKey("Prioridad")) {
             setPrioridad((int) datos.get("Prioridad"));
         }
-        else{ this.Prioridad=5;}
+        else{ this.Prioridad=3;}
 
         setTiempo_estimado((int) datos.get("Tiempo_estimado"));
     }
@@ -49,7 +56,15 @@ public class Paquete implements Comparable<Paquete>{
 
     private String generateCodigo(){
         Random entero=new Random();
-        return "PQ" + entero.nextInt(999);
+        int random = entero.nextInt(999);
+        if (random < 10){
+            return "PD000" + random;
+        }
+        if (random < 100){
+            return "PD00" + random;
+        }
+
+        return "PD" + entero.nextInt(9999);
     }
 
     public void setDestino(Destino destino){
@@ -94,10 +109,19 @@ public class Paquete implements Comparable<Paquete>{
     }
     @Override
     public String toString(){
-        return this.getCodigo();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Codigo: ").append(this.getCodigo()).append("\n");
+        sb.append("Destino: ").append(this.getDestino()).append("\n");
+        sb.append("Peso: ").append(this.getPeso()).append("\n");
+        sb.append("Prioridad: ").append(this.getPrioridad()).append("\n");
+        sb.append("Tiempo_estimado: ").append(this.getTiempo_estimado()).append("\n");
+        sb.append("----------------------------------------\n");
+        sb.append("\n");
+        return sb.toString();
     }
+
     @Override
     public int compareTo(Paquete o) {
-        return Integer.compare(this.getPrioridad(), o.getPrioridad());
+        return Integer.compare(this.getPID_Raw(), o.getPID_Raw());
     }
 }
