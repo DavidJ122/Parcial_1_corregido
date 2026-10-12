@@ -71,7 +71,7 @@ public class Paquete implements Comparable<Paquete>{
     }
     //Asigna el destino al paquete
     //En caso de que el destino sea nulo, se lanza una excepcion
-    public void setDestino(Destino destino){
+    private void setDestino(Destino destino){
         if (destino==null) { throw new IllegalArgumentException("El destino no puede ser nulo");}
         this.destino=destino;
     }
@@ -102,9 +102,9 @@ public class Paquete implements Comparable<Paquete>{
         return this.Prioridad;
     }
     //Asigna el tiempo estimado al paquete
-    //En caso de que el tiempo estimado sea menor que 0, se lanza una excepcion
+    //En caso de que el tiempo estimado sea menor o igual que 0, se lanza una excepcion
     private void setTiempo_estimado(int Tiempo_estimado){
-        if (Tiempo_estimado < 0) { throw new IllegalArgumentException("El tiempo estimado debe ser mayor a 0");}
+        if (Tiempo_estimado <= 0) { throw new IllegalArgumentException("El tiempo estimado debe ser mayor a 0");}
         this.Tiempo_estimado=Tiempo_estimado;
     }
     //Devuelve el tiempo estimado del paquete
@@ -132,6 +132,8 @@ public class Paquete implements Comparable<Paquete>{
     //Compara dos paquetes por el PID sin el prefijo "PD"
     @Override
     public int compareTo(Paquete o) {
-        return Integer.compare(this.getPID_Raw(), o.getPID_Raw());
+        return o.compareTo(this);
     }
+
+
 }

@@ -11,7 +11,7 @@ import Remodelado.ListCustom.List;
 public class CentroDistribucion {
 
     // 1. Atributos: Instancias de las estructuras especializadas que crearon
-    private final EstructuraLlegada historialLlegada;
+    private final EstructuraAuditoria historialLlegada;
     private final EstructuraPrioritaria colaDespacho;
     private final EstructuraDestino paquetesPorDestino;
     private final EstructuraOrdenID registroPorId;
@@ -23,7 +23,7 @@ public class CentroDistribucion {
     public CentroDistribucion(List<Paquete> historialPaquetes) {
 
         // Inicializamos las estructuras
-        this.historialLlegada = new EstructuraLlegada();
+        this.historialLlegada = new EstructuraAuditoria();
         this.paquetesPorDestino = new EstructuraDestino();
         this.registroPorId = new EstructuraOrdenID();
         this.colaEntregasNormales = new EstructuraFIFO();

@@ -6,7 +6,23 @@ import Remodelado.Bases.modelo.Paquete;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+//Busca un paquete por su codigo de forma "eficiente" y por divide y venceras.
+/*
+Se utiliza para la busqueda de un paquete por su codigo.
+Funciona dividiendo la lista en dos partes y buscando en cada una de ellas.
+Se itera sobre las dos mitades.
+Se evalua recursivamente.
+En caso de que:
+- El codigo no se encuentra en el nodo del indice:
+    - Si es final: Devuelve -1
+    - Si no es final: Se evalua recursivamente.
+-  El codigo se encuentra en el nodo del indice:
+    - Devuelve el indice del nodo.
+    - En caso de que sea la segunda mitad: Devuelve el indice del nodo + la mitad de la lista.
+Indice1: Indica el indice del nodo del codigo en la primera mitad, sumado con 1 para que de si no se encuentra.
+Indice2: Indica el indice del nodo del codigo en la segunda mitad, sumado con 1 para que de si no se encuentra.
+Si ambos indice son 0, devuelve null.
+ */
 public class BusquedaCodigo {
 
 

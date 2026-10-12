@@ -3,7 +3,7 @@ package Remodelado.Bases.Recursivos;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.ArrayList;
-
+//Filtro que obtiene los paquetes con prioridad mayor o igual a la minima.
 public class FiltroPrioridad{
 
     public Integer filtrar(ArrayList<Paquete> dato, int priminima,int i) {
@@ -18,7 +18,7 @@ public class FiltroPrioridad{
         }
         return this.filtrar(dato,priminima,i+1);
     }
-
+    //metodo condicional que filtra los paquetes para una mejor legibilidad
     private boolean filtro(Paquete p, int priminima){
         if (p.getPrioridad() >= priminima){
             return true;

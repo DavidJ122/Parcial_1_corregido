@@ -3,7 +3,8 @@ package Remodelado.Bases.Recursivos;
 import Remodelado.Bases.modelo.Paquete;
 
 import java.util.ArrayList;
-
+//Filtro que calcula el peso total de los paquetes.
+//Se utilizan metodos recursivos
 public class FiltroPesoTotal implements FiltrosRecursivos<ArrayList<Paquete>, Double>{
 
     @Override

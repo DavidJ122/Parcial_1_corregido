@@ -6,6 +6,8 @@ import Remodelado.Enum.Destino;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.TreeSet;
+
 //Estructura especializada para los paquetes con destino.
 /* Esta diseñada con el proposito de utilizar un hashmap de tal manera
 que el destino sea la clave y el valor sea una lista de paquetes asignadas al destino.
@@ -41,6 +43,7 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
     //En caso de que el destino se quede sin paquetes, se elimina el destino del hashmap.
     @Override
     public void removePaquete(Paquete paquete) {
+        if (!this.paquetes.containsKey(paquete.getDestino())){throw new RuntimeException("El destino no esta incluido");}
         ArrayList<Paquete> paquetes = this.paquetes.get(paquete.getDestino());
         paquetes.remove(paquete);
         if (paquetes.isEmpty()){
@@ -68,7 +71,11 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
     //Obtener el tamaño del hashmap.
     @Override
     public int getSize() {
-        return this.paquetes.size();
+        int tam = 0;
+        for (Destino d : this.paquetes.keySet()) {
+            tam = tam + this.paquetes.get(d).size();
+        }
+        return tam;
     }
     //Retorna verdadero o falso en caso de que el hashmap este vacio.
     @Override
@@ -104,4 +111,13 @@ public class EstructuraDestino implements IEstructura<HashMap<Destino, ArrayList
         }
         return sb.toString();
     }
+    //Retorna un conjunto de strings con todos los municipios del hashmap.
+    public TreeSet<String> getPaquetesOrdenID(){
+        TreeSet<String> paquetesOrdenID = new TreeSet<>();
+        for (Destino d : this.paquetes.keySet()) {
+            paquetesOrdenID.add(d.toString());
+        }
+        return paquetesOrdenID;
+    }
+
 }

@@ -4,17 +4,17 @@ import Remodelado.Bases.modelo.Paquete;
 
 import java.util.Collection;
 import java.util.LinkedList;
-//Estructura especializada para los paquetes en orden de llegada.
+//Estructura especializada para los paquetes en orden de llegada para razones de auditorias.
 /*
 Se utiliza para las operaciones de auditorias, se registran los paquetes entrantes.
 No obstante, no se utiliza para las operaciones de despacho.
 Se usa un LinkedList para que tengan un orden de llegada.
 
  */
-public class EstructuraLlegada implements IEstructura<LinkedList<Paquete>,String>{
+public class EstructuraAuditoria implements IEstructura<LinkedList<Paquete>,String>{
     LinkedList<Paquete> paquetes;
     //Constructor
-    public EstructuraLlegada(){
+    public EstructuraAuditoria(){
         this.paquetes = new LinkedList<>();
     }
     //Obtiene el LinkedList de paquetes.

@@ -1,10 +1,5 @@
-import Remodelado.Bases.Comparadores.ComparadorDespacho;
-import Remodelado.Bases.Comparadores.ComparadorTiempo;
-import Remodelado.Bases.Comparadores.ComparadorPeso;
-import Remodelado.Bases.Comparadores.ComparadorPrioritario;
 import Remodelado.Bases.Estructuras.*;
 import Remodelado.Bases.modelo.Paquete;
-import Remodelado.Bases.Recursivos.BusquedaCodigo;
 import Remodelado.Enum.Destino;
 
 import java.util.HashMap;
@@ -17,7 +12,7 @@ public class Main {
 
 
     }
-    public static void generarPaquetes(EstructuraOrdenID estructuraPrincipal, EstructuraLlegada estructuraLlegada){
+    public static void generarPaquetes(EstructuraOrdenID estructuraPrincipal, EstructuraAuditoria estructuraAuditoria){
 
         //Declaracion de variables
         HashMap<String, Object> datos1 = new HashMap<>();
@@ -28,7 +23,7 @@ public class Main {
         datos1.put("Tiempo_estimado", 10);
         Paquete paquete1 = new Paquete(datos1);
         estructuraPrincipal.addPaquete(paquete1);
-        estructuraLlegada.addPaquete(paquete1);
+        estructuraAuditoria.addPaquete(paquete1);
 
         HashMap<String, Object> datos2 = new HashMap<>();
         datos2.put("Destino", Destino.Pereira);
@@ -37,7 +32,7 @@ public class Main {
         datos2.put("Tiempo_estimado", 20);
         Paquete paquete2 = new Paquete(datos2);
         estructuraPrincipal.addPaquete(paquete2);
-        estructuraLlegada.addPaquete(paquete2);
+        estructuraAuditoria.addPaquete(paquete2);
 
 
         HashMap<String, Object> datos3 = new HashMap<>();
@@ -47,7 +42,7 @@ public class Main {
         datos3.put("Tiempo_estimado", 15);
         Paquete paquete3 = new Paquete(datos3);
         estructuraPrincipal.addPaquete(paquete3);
-        estructuraLlegada.addPaquete(paquete3);
+        estructuraAuditoria.addPaquete(paquete3);
 
 
 
@@ -59,7 +54,7 @@ public class Main {
         datos4.put("Tiempo_estimado", 30);
         Paquete paquete4 = new Paquete(datos4);
         estructuraPrincipal.addPaquete(paquete4);
-        estructuraLlegada.addPaquete(paquete4);
+        estructuraAuditoria.addPaquete(paquete4);
 
         HashMap<String, Object> datos5 = new HashMap<>();
         datos5.put("Destino", Destino.Armenia);
@@ -67,7 +62,7 @@ public class Main {
         datos5.put("Tiempo_estimado", 12);
         Paquete paquete5 = new Paquete(datos5);
         estructuraPrincipal.addPaquete(paquete5);
-        estructuraLlegada.addPaquete(paquete5);
+        estructuraAuditoria.addPaquete(paquete5);
 
         HashMap<String, Object> datos6 = new HashMap<>();
         datos6.put("Codigo", "PD005");
@@ -77,7 +72,7 @@ public class Main {
         datos6.put("Tiempo_estimado", 25);
         Paquete paquete6 = new Paquete(datos6);
         estructuraPrincipal.addPaquete(paquete6);
-        estructuraLlegada.addPaquete(paquete6);
+        estructuraAuditoria.addPaquete(paquete6);
 
         HashMap<String, Object> datos7 = new HashMap<>();
         datos7.put("Codigo", "PD006");
@@ -87,7 +82,7 @@ public class Main {
         datos7.put("Tiempo_estimado", 18);
         Paquete paquete7 = new Paquete(datos7);
         estructuraPrincipal.addPaquete(paquete7);
-        estructuraLlegada.addPaquete(paquete7);
+        estructuraAuditoria.addPaquete(paquete7);
 
         HashMap<String, Object> datos8 = new HashMap<>();
         datos8.put("Destino", Destino.El_valle);
@@ -96,7 +91,7 @@ public class Main {
         datos8.put("Tiempo_estimado", 8);
         Paquete paquete8 = new Paquete(datos8);
         estructuraPrincipal.addPaquete(paquete8);
-        estructuraLlegada.addPaquete(paquete8);
+        estructuraAuditoria.addPaquete(paquete8);
 
         HashMap<String, Object> datos9 = new HashMap<>();
         datos9.put("Codigo", "PD008");
@@ -105,7 +100,7 @@ public class Main {
         datos9.put("Tiempo_estimado", 22);
         Paquete paquete9 = new Paquete(datos9);
         estructuraPrincipal.addPaquete(paquete9);
-        estructuraLlegada.addPaquete(paquete9);
+        estructuraAuditoria.addPaquete(paquete9);
 
         HashMap<String, Object> datos10 = new HashMap<>();
         datos10.put("Destino", Destino.Pereira);
@@ -114,7 +109,7 @@ public class Main {
         datos10.put("Tiempo_estimado", 14);
         Paquete paquete10 = new Paquete(datos10);
         estructuraPrincipal.addPaquete(paquete10);
-        estructuraLlegada.addPaquete(paquete10);
+        estructuraAuditoria.addPaquete(paquete10);
 
         HashMap<String, Object> datos11 = new HashMap<>();
         datos11.put("Codigo", "PD010");
@@ -124,7 +119,7 @@ public class Main {
         datos11.put("Tiempo_estimado", 35);
         Paquete paquete11 = new Paquete(datos11);
         estructuraPrincipal.addPaquete(paquete11);
-        estructuraLlegada.addPaquete(paquete11);
+        estructuraAuditoria.addPaquete(paquete11);
 
         HashMap<String, Object> datos12 = new HashMap<>();
         datos12.put("Destino", Destino.El_valle);
@@ -132,7 +127,7 @@ public class Main {
         datos12.put("Tiempo_estimado", 16);
         Paquete paquete12 = new Paquete(datos12);
         estructuraPrincipal.addPaquete(paquete12);
-        estructuraLlegada.addPaquete(paquete12);
+        estructuraAuditoria.addPaquete(paquete12);
 
         HashMap<String, Object> datos13 = new HashMap<>();
         datos13.put("Codigo", "PD012");
@@ -142,7 +137,7 @@ public class Main {
         datos13.put("Tiempo_estimado", 7);
         Paquete paquete13 = new Paquete(datos13);
         estructuraPrincipal.addPaquete(paquete13);
-        estructuraLlegada.addPaquete(paquete13);
+        estructuraAuditoria.addPaquete(paquete13);
 
         HashMap<String, Object> datos14 = new HashMap<>();
         datos14.put("Destino", Destino.Pereira);
@@ -151,7 +146,7 @@ public class Main {
         datos14.put("Tiempo_estimado", 19);
         Paquete paquete14 = new Paquete(datos14);
         estructuraPrincipal.addPaquete(paquete14);
-        estructuraLlegada.addPaquete(paquete14);
+        estructuraAuditoria.addPaquete(paquete14);
 
         HashMap<String, Object> datos15 = new HashMap<>();
         datos15.put("Codigo", "PD014");
@@ -160,7 +155,7 @@ public class Main {
         datos15.put("Tiempo_estimado", 28);
         Paquete paquete15 = new Paquete(datos15);
         estructuraPrincipal.addPaquete(paquete15);
-        estructuraLlegada.addPaquete(paquete15);
+        estructuraAuditoria.addPaquete(paquete15);
 
         HashMap<String, Object> datos16 = new HashMap<>();
         datos16.put("Codigo", "PD015");
@@ -170,7 +165,7 @@ public class Main {
         datos16.put("Tiempo_estimado", 13);
         Paquete paquete16 = new Paquete(datos16);
         estructuraPrincipal.addPaquete(paquete16);
-        estructuraLlegada.addPaquete(paquete16);
+        estructuraAuditoria.addPaquete(paquete16);
 
         HashMap<String, Object> datos17 = new HashMap<>();
         datos17.put("Destino", Destino.Armenia);
@@ -178,7 +173,7 @@ public class Main {
         datos17.put("Tiempo_estimado", 32);
         Paquete paquete17 = new Paquete(datos17);
         estructuraPrincipal.addPaquete(paquete17);
-        estructuraLlegada.addPaquete(paquete17);
+        estructuraAuditoria.addPaquete(paquete17);
 
         HashMap<String, Object> datos18 = new HashMap<>();
         datos18.put("Codigo", "PD017");
@@ -188,7 +183,7 @@ public class Main {
         datos18.put("Tiempo_estimado", 9);
         Paquete paquete18 = new Paquete(datos18);
         estructuraPrincipal.addPaquete(paquete18);
-        estructuraLlegada.addPaquete(paquete18);
+        estructuraAuditoria.addPaquete(paquete18);
 
         HashMap<String, Object> datos19 = new HashMap<>();
         datos19.put("Destino", Destino.Circacia);
@@ -197,7 +192,7 @@ public class Main {
         datos19.put("Tiempo_estimado", 17);
         Paquete paquete19 = new Paquete(datos19);
         estructuraPrincipal.addPaquete(paquete19);
-        estructuraLlegada.addPaquete(paquete19);
+        estructuraAuditoria.addPaquete(paquete19);
 
         HashMap<String, Object> datos20 = new HashMap<>();
         datos20.put("Codigo", "PD019");
@@ -206,7 +201,7 @@ public class Main {
         datos20.put("Tiempo_estimado", 40);
         Paquete paquete20 = new Paquete(datos20);
         estructuraPrincipal.addPaquete(paquete20);
-        estructuraLlegada.addPaquete(paquete20);
+        estructuraAuditoria.addPaquete(paquete20);
 
         HashMap<String, Object> datos21 = new HashMap<>();
         datos21.put("Destino", Destino.Armenia);
@@ -215,7 +210,7 @@ public class Main {
         datos21.put("Tiempo_estimado", 11);
         Paquete paquete21 = new Paquete(datos21);
         estructuraPrincipal.addPaquete(paquete21);
-        estructuraLlegada.addPaquete(paquete21);
+        estructuraAuditoria.addPaquete(paquete21);
 
         HashMap<String, Object> datos22 = new HashMap<>();
         datos22.put("Codigo", "PD021");
@@ -225,7 +220,7 @@ public class Main {
         datos22.put("Tiempo_estimado", 23);
         Paquete paquete22 = new Paquete(datos22);
         estructuraPrincipal.addPaquete(paquete22);
-        estructuraLlegada.addPaquete(paquete22);
+        estructuraAuditoria.addPaquete(paquete22);
 
         HashMap<String, Object> datos23 = new HashMap<>();
         datos23.put("Destino", Destino.Circacia);
@@ -233,7 +228,7 @@ public class Main {
         datos23.put("Tiempo_estimado", 6);
         Paquete paquete23 = new Paquete(datos23);
         estructuraPrincipal.addPaquete(paquete23);
-        estructuraLlegada.addPaquete(paquete23);
+        estructuraAuditoria.addPaquete(paquete23);
 
         HashMap<String, Object> datos24 = new HashMap<>();
         datos24.put("Codigo", "PD023");
@@ -243,7 +238,7 @@ public class Main {
         datos24.put("Tiempo_estimado", 21);
         Paquete paquete24 = new Paquete(datos24);
         estructuraPrincipal.addPaquete(paquete24);
-        estructuraLlegada.addPaquete(paquete24);
+        estructuraAuditoria.addPaquete(paquete24);
 
         HashMap<String, Object> datos25 = new HashMap<>();
         datos25.put("Destino", Destino.Armenia);
@@ -252,7 +247,7 @@ public class Main {
         datos25.put("Tiempo_estimado", 8);
         Paquete paquete25 = new Paquete(datos25);
         estructuraPrincipal.addPaquete(paquete25);
-        estructuraLlegada.addPaquete(paquete25);
+        estructuraAuditoria.addPaquete(paquete25);
 
         HashMap<String, Object> datos26 = new HashMap<>();
         datos26.put("Codigo", "PD025");
@@ -261,7 +256,7 @@ public class Main {
         datos26.put("Tiempo_estimado", 34);
         Paquete paquete26 = new Paquete(datos26);
         estructuraPrincipal.addPaquete(paquete26);
-        estructuraLlegada.addPaquete(paquete26);
+        estructuraAuditoria.addPaquete(paquete26);
 
         HashMap<String, Object> datos27 = new HashMap<>();
         datos27.put("Destino", Destino.Circacia);
@@ -270,7 +265,7 @@ public class Main {
         datos27.put("Tiempo_estimado", 16);
         Paquete paquete27 = new Paquete(datos27);
         estructuraPrincipal.addPaquete(paquete27);
-        estructuraLlegada.addPaquete(paquete27);
+        estructuraAuditoria.addPaquete(paquete27);
 
         HashMap<String, Object> datos28 = new HashMap<>();
         datos28.put("Codigo", "PD027");
@@ -280,7 +275,7 @@ public class Main {
         datos28.put("Tiempo_estimado", 24);
         Paquete paquete28 = new Paquete(datos28);
         estructuraPrincipal.addPaquete(paquete28);
-        estructuraLlegada.addPaquete(paquete28);
+        estructuraAuditoria.addPaquete(paquete28);
 
         HashMap<String, Object> datos29 = new HashMap<>();
         datos29.put("Destino", Destino.Armenia);
@@ -288,7 +283,7 @@ public class Main {
         datos29.put("Tiempo_estimado", 10);
         Paquete paquete29 = new Paquete(datos29);
         estructuraPrincipal.addPaquete(paquete29);
-        estructuraLlegada.addPaquete(paquete29);
+        estructuraAuditoria.addPaquete(paquete29);
 
         HashMap<String, Object> datos30 = new HashMap<>();
         datos30.put("Codigo", "PD029");
@@ -298,7 +293,7 @@ public class Main {
         datos30.put("Tiempo_estimado", 38);
         Paquete paquete30 = new Paquete(datos30);
         estructuraPrincipal.addPaquete(paquete30);
-        estructuraLlegada.addPaquete(paquete30);
+        estructuraAuditoria.addPaquete(paquete30);
     }
 
 }

@@ -33,10 +33,10 @@ public class EstructuraFIFO implements IEstructura<ArrayDeque<Paquete>,String> {
     //¿Se borra?
     @Override
     public Paquete getPaquete(String ID) {
-        return null;
+        return this.getFirst();
     }
     //Obtiene el primer paquete del ArrayDeque.
-    public Paquete getFirst(){
+    private Paquete getFirst(){
         return this.paquetes.poll();
     }
     //Obtiene el tamaño del ArrayDeque.
