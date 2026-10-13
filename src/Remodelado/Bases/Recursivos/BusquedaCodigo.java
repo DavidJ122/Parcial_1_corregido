@@ -37,13 +37,24 @@ public class BusquedaCodigo {
         int medio = lista.size() / 2;
 
         // Compara el código del paquete central con el código buscado.
-        int comparativa = lista.get(medio).getCodigo().compareTo(dato);
-
-        if (comparativa == 0) {
-            // Si los códigos coinciden, devuelve el paquete encontrado.
+        int comparativa_medio = lista.get(medio).getCodigo().compareTo(dato);
+        int comparativa_alto = lista.getLast().getCodigo().compareTo(dato);
+        int comparativa_bajo = lista.getFirst().getCodigo().compareTo(dato);
+        if (comparativa_medio == comparativa_alto && comparativa_medio == comparativa_bajo && comparativa_medio == 0){
             return lista.get(medio);
+        }
 
-        } else if (comparativa > 0) {
+        if (comparativa_medio == 0 || comparativa_alto == 0 || comparativa_bajo == 0 ) {
+            if (comparativa_medio == 0){
+                return lista.get(medio);
+            }
+            if (comparativa_alto == 0){
+                return lista.getLast();
+            }
+            return lista.getFirst();
+
+
+        } else if (comparativa_medio > 0) {
             // Si el código central es mayor, busca en la mitad izquierda.
             return buscarRecursivo(
                     new ArrayList<>(lista.subList(0, medio)), dato
